@@ -1,5 +1,6 @@
 module.exports = {
   '@tags': ['test'],
+    
   before: function(browser) {
     browser
       .url('http://nightwatch.local/')
@@ -11,12 +12,14 @@ module.exports = {
       .waitForElementVisible('#block-bartik-page-title', 1000)
       .assert.containsText('#block-bartik-page-title', 'admin');
   },
+    
   after: function(browser) {
     browser
       .useXpath()
       .click("//a[text()='Log out']")
       .drupalLogAndEnd({ onlyOnError: false });
   },
+    
   'Logging in, creating a basic page, logging out': (browser) => {
     browser
       .drupalRelativeURL('/node/add/page')
@@ -25,7 +28,6 @@ module.exports = {
       .click('#edit-submit')
       .waitForElementVisible('body', 1000)
       .assert.containsText('#block-bartik-page-title', 'A new node')
-      .waitForElementVisible('body', 1000)
       .useXpath()
       .click("//a[text()='Delete']")
       .useCss()
