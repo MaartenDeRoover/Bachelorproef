@@ -4,7 +4,7 @@ fixture `Simple test`
     .page `http://testcafe.local/`
 
     .beforeEach( async t => {
-      await t.expect(Selector('#block-bartik-page-title').find('h1').innerText).contains('Welcome to TestCafé')
+      await t.expect(Selector('#block-bartik-page-title').find('h1').innerText).contains('Welcome to TestCafe')
       .click('#block-bartik-account-menu .content ul li a')
       .typeText('input[name=name]', 'admin')
       .typeText('input[name=pass]', 'admin')
@@ -14,7 +14,7 @@ fixture `Simple test`
 
     .afterEach( async t => {
       await t.click(Selector('#block-bartik-account-menu ul li a').withText('Log out'))
-      .expect(Selector('#block-bartik-page-title').find('h1').innerText).contains('Welcome to TestCafé');
+      .expect(Selector('#block-bartik-page-title').find('h1').innerText).contains('Welcome to TestCafe');
     });
 
 test('Creating a basic page and deleting that page', async t => {

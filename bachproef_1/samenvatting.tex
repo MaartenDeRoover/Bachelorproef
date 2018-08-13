@@ -1,0 +1,65 @@
+%%=============================================================================
+%% Samenvatting
+%%=============================================================================
+
+% TODO: De "abstract" of samenvatting is een kernachtige (~ 1 blz. voor een
+% thesis) synthese van het document.
+%
+% Deze aspecten moeten zeker aan bod komen:
+% - Context: waarom is dit werk belangrijk?
+% - Nood: waarom moest dit onderzocht worden?
+% - Taak: wat heb je precies gedaan?
+% - Object: wat staat in dit document geschreven?
+% - Resultaat: wat was het resultaat?
+% - Conclusie: wat is/zijn de belangrijkste conclusie(s)?
+% - Perspectief: blijven er nog vragen open die in de toekomst nog kunnen
+%    onderzocht worden? Wat is een mogelijk vervolg voor jouw onderzoek?
+%
+% LET OP! Een samenvatting is GEEN voorwoord!
+
+%%---------- Nederlandse samenvatting -----------------------------------------
+%
+% TODO: Als je je bachelorproef in het Engels schrijft, moet je eerst een
+% Nederlandse samenvatting invoegen. Haal daarvoor onderstaande code uit
+% commentaar.
+% Wie zijn bachelorproef in het Nederlands schrijft, kan dit negeren, de inhoud
+% wordt niet in het document ingevoegd.
+
+\IfLanguageName{english}{%
+\selectlanguage{dutch}
+\chapter*{Samenvatting}
+
+\selectlanguage{english}
+}{}
+
+\newglossaryentry{CI}{
+	type=\acronymtype,
+    name={CI},
+    description={Continue Integratie},
+    first={Continue Integratie (CI)\glsadd{CIG}},
+    see=[Glossary:]{CIG}
+}
+\newglossaryentry{CIG}
+{
+    name={CI},
+    description={Continue Integratie is het proces waarbij code die weggeschreven is met een versie controle systeem automatisch wordt getest en gebouwd naar een omgeving, \texttt{\textcite{Guckenheimer2017}}}
+}
+\newglossaryentry{Paragraph Types}
+{
+    name=Paragraph Types,
+    description={Paragraph Types zijn inhoudstypes die gemaakt worden met de Drupal module Paragraphs. Paragraph Types kunnen zeer uiteenlopend zijn, van een simpele blok met een afbeelding tot een ingewikkelde slideshow, \texttt{\textcite{Bobbeldijk2013}}}
+}
+
+%%---------- Samenvatting -----------------------------------------------------
+% De samenvatting in de hoofdtaal van het document
+
+\chapter*{\IfLanguageName{dutch}{Samenvatting}{Abstract}}
+Tegenwoordig zijn er een hele hoop verschillende tools voor het functioneel testen van een website. Sommige van deze tools bestaan al langer en hebben een groot gebruikersbestand waardoor er veel documentatie over te vinden is. Andere zijn recenter en is moeilijk documentatie over te vinden, maar omdat ze dingen soms vanaf de basis anders doen kunnen ze beter zijn dan de tools die al langer bestaan. Sommige tools werken op zichzelf en voor andere heb je extra tools nodig om ze te gebruiken. Dit alles zorgt er voor dat het voor Dropsolid niet makkelijk is om de beste keuze te maken.
+
+Het eerste hoofdstuk van dit onderzoek vormt de literatuurstudie van dit onderzoek en hierin wordt de stand van zaken in verband met functionele testen besproken. In het daarop volgende hoofdstuk worden één voor één de tools die onderzocht werden besproken en getest. Ook de tools die niet onderzocht werden maar wel significant kunnen zijn voor functionele testen worden hier besproken en waarom deze niet geselecteerd werden. De tools die in dit onderzoek onderzocht werden zijn: TestCafé, Cypress, Nightwatch, WebdriverIO, Nightmare en Puppeteer. Voor elk van deze tools werd een test geschreven die hetzelfde doet om een idee te krijgen over de verschillende uitvoeringstijden en om de syntax te kunnen vergelijken.
+
+In samenspraak met Dropsolid concludeerden we dat Nightwatch de beste tool is voor hun use case. Deze tool kwam als beste naar voor grotendeels omdat de Drupal community naar deze tool toe groeit. Zo zit Nightwatch al in de core van de pre-release van Drupal 8.6. Verder is cross-browser en cross-platform testing met Nightwatch mogelijk en is er een tool specifiek voor cloud testing met Nightwatch in ontwikkeling, Nightcloud.
+
+Tenslotte wordt in het laatste hoofdstuk uitgelegd hoe je een test schrijft met Nightwatch die de \gls{Paragraph Types} van Dropsolid hun Drupal 8 skelet, genaamd Rocketship, test.
+
+In de toekomst kan dit onderzoek uitgebreid worden met een onderzoek dat uitzoekt welke service zoals SauceLabs of Browserstack de beste is voor cross-browser testing in de cloud. Ook een onderzoek dat de \gls{CI} mogelijkheden uitzoekt en hoe je deze implementeert zou een goed vervolg zijn.

@@ -1,0 +1,97 @@
+%%=============================================================================
+%% Methodologie
+%%=============================================================================
+
+\chapter{Methodologie}
+\label{ch:methodologie}
+\section{Werkomgeving}
+In dit hoofdstuk wordt de werkomgeving waarvan voor dit onderzoek gebruik is gemaakt besproken. De verschillende programma's en de reden waarom deze verkozen werden worden individueel toegelicht. Ik heb telkens, indien dit mogelijk was, gebruik gemaakt van de laatste stabiele versie die beschikbaar was om dit onderzoek zo actueel mogelijk te maken. Deze programma's werden voornamelijk geïnstalleerd met de package manager van de Linux versie die ik gebruik maar er wordt wel vermeld waar deze programma's te vinden zijn.
+
+\subsection{Virtuele machine}
+Dit onderzoek maakt gebruik van de laatste versie van VirtualBox die momenteel beschikbaar is, VirtualBox 5.2.16 \textcite{VirtualBox}. VirtualBox is een programma dat je toelaat om andere besturingssystemen te draaien binnen je huidige besturingssysteem. VirtualBox wordt gebruikt om een omgeving op te zetten die enkele dient voor dit onderzoek en dus niet beïnvloed wordt door externe factoren, zoals het downloaden van programma's voor andere doeleinden. Deze omgeving bevat dus enkel het nodige voor dit onderzoek en niet meer. 
+
+In VirtualBox werd er een linux virtuele machine opgezet. Er wordt gebruik gemaakt van Linux Mint 19 64-bit Cinnamon editie omdat dit besturingssysteem door Dropsolid wordt aangeraden. Linux Mint is een gratis en open source besturingssysteem dat gebaseerd is op Debian en Ubuntu en al 30000 packages voorziet, \textcite{LinuxMint}.
+
+\newglossaryentry{CPU}{
+	type=\acronymtype,
+    name={CPU},
+    description={Central Processing Unit},
+	plural={CPU's}
+    see=[Glossary:]{CPUG}
+}
+\newglossaryentry{CPUG}{
+	name={CPU},
+    description={De Central Processing Unit is de computercomponent die verantwoordelijk is voor het interpreteren en uitvoeren van de meeste opdrachten van de andere hardware en software, \textcite{Fisher2018}}
+    plural={CPU's}
+}
+De specificaties van de virtuele machine zijn de volgende:
+\begin{itemize}
+\item 8192MB RAM geheugen.
+\item Een virtuele harde schijf met een vaste grootte van 50GB. Er wordt gebruikt gemaakt van een vaste grootte en niet vab een virtuele harde schijf die dynamisch vergroot omdat die laatste de performantie van zowel het huidig besturingssysteem als dat van de virtuele machine kan aantasten, \textcite{Sanders2006}.
+\item 128 MB video geheugen.
+\item 4 glspl{CPU}
+\item In de netwerkinstellingen werden 2 poortdoorverwijzingen ingesteld. De eerste voor HTTP met als protocol TCP en van hostpoort 80 naar gastpoort 80. De tweede voor MariaDB met terug TCP als protocol en van hostpoort 3306 naar gastpoort 3306.
+\end{itemize}
+
+\subsection{LAMP-stack}
+
+LAMP-stack is de benaming voor een combinatie van softwarepakketten die dienen voor het draaien van websites. De LAMP-stack die voor dit onderzoek werd opgezet bestaat uit Linux Mint, Apache2, MariaDB en PHP 7.1. De Linux Mint versie werd reeds besproken in het vorige deel, de overige worden in dit deel besproken.
+
+\paragraph{Apache}
+Apache is een gratis \gls{web server} en de laatste stabiele versie die is uitgekomen is 2.4.34. Voor dit onderzoek wordt gebruik gemaakt van deze laatste stabiele versie van Apache en niet van NGINX of IIS omdat Apache gedeelde hosting mogelijk maakt met .htaccess bestanden. Apache heeft momenteel met 46\% ook het grootste marktaandeel, \autocite{Leslie2018}.
+
+\paragraph{MariaDB}
+MariaDB is een relationeel databasemanagementsysteem. Een relationeel databasemanagementsysteem is een programma waarmee je een relationele database kunt creëren, updaten en beheren. Een database is een set van data dat op een computer wordt opgeslagen en relationeel wijst er op dat er een structuur in zit die werkt aan de hand van relaties tussen de verschillende stukken data, \autocite{RDBMS}. Voor dit onderzoek wordt de laatste stabiele versie van MariaDB gebruikt, MariaDB 10.3.8. De keuze ging uit naar MariaDB en niet naar MySQL door 2 redenen. De eerste reden is dat MariaDB performanter is dan MySQL dit blijkt zowel uit het onderzoek van Lindstrom in 2014, \autocite{Lindstrom2014}, als uit het recentere onderzoek in 2017 van Taranto, \autocite{Taranto2017}. De tweede reden is dat mijn persoonlijke ervaring mij leerde dat Drupal websites beter met MariaDB samenwerken dan MySQL.
+
+\paragraph{PHP}
+PHP, Hypertext preprocessor, is een scripting taal die specifiek voor web development ontwikkelt is. Aangezien PHP de programmeertaal is van Drupal hebben we dit dus zeker nodig. De laatste stabiele versie van PHP is PHP 7.2.8 en deze versie wordt vanaf Drupal 8.5.0 ondersteund. De laatste stabiele versie van Drupal die uitgekomen is en die in dit onderzoek gebruikt wordt, is 8.5.6. Meer hierover in het gedeelte over Drupal.
+
+\subsection{Extra tools}
+\paragraph{phpMyAdmin}
+PhpMyAdmin is een handige tool om je database te beheren vanuit een webinterface. De versie die gebruikt wordt is opnieuw de laatste stabiele versie en voor phpmyadmin is dat momenteel 4.8.2.
+
+\paragraph{Drush}
+Drush is een hulpprogramma om Drupal vanuit de command line te bedienen. Drush bevat handige commando's om bijvoorbeeld de cache van je site te legen vanuit je command line. Aangezien dit allemaal vanuit je command line gebeurt is dit dus sneller dan via de webinterface. De versie van drush die in dit onderzoek gebruikt wordt is 8.1.17.
+
+\paragraph{Git}
+Git is een gratis open source versiebeheersysteem. Aan de hand van git kan ik bestanden en mappen gemakkelijk online in een git repository bijhouden en updaten. De laatste stabiele versie van Git dat uitgekomen is is 2.18.0 en dit is ook de versie die gebruikt wordt.
+
+\paragraph{Node.js \& npm}
+Node.js is een opensource runtime-omgeving die het mogelijk maakt om javascript code uit te voeren buiten de browser. De versie van Node.js die voor dit onderzoek gebruikt wordt is Node.js 10.8.0. Bij de installatie van Node.js komt npm bij. Npm staat voor Node Package Manager en is dus het programma waarmee je node modules mee kan downloaden. De versie van npm die meegeleverd werd met Node.js 10.8.0 is 6.2.0. Node.js en npm wordt in dit onderzoek meerdere keren gebruikt om verschillende tools, frameworks of libraries te downloaden en uit te voeren.
+
+\paragraph{Visual Studio Code}
+Visual Studio Code is de code-editor die in dit onderzoek gebruikt wordt om de testen te schrijven of om de configuratie bestanden aan te passen. Ik heb gekozen voor Visual Studio Code omdat dit een veelzijdige lichte code-editor is die kan uitgebreid worden met plugins voor jouw specifieke doeleinden.
+
+\subsection{Drupal}
+Aangezien dit onderzoek uitgevoerd wordt in opdracht van Dropsolid, wordt dus gebruik gemaakt van het \gls{contentmanagementsysteem} waarin zij gespecialiseerd zijn, namelijk Drupal.
+
+Drupal is een gratis opensource contentmanagementsysteem geschreven in PHP dat zeer krachtig is en waarmee je flexibele websites kunt bouwen die zeer schaalbaar zijn. Voor het bouwen van een website in Drupal heb je een redelijke portie technische kennis nodig, het onderhouden en toevoegen van inhoud verreist echter minder technische kennis en kan makkelijk door iemand gedaan worden die niet technisch is. Drupal is opensource en heeft een grote community die actief modules en thema's toevoegen aan drupal.org zodat deze door anderen kunnen gebruikt worden. Een Drupal module is een extensie die je kan toevoegen aan je Drupal website en die een bepaalde functionaliteit voorziet. Thema's zijn extensies die je aan je site kan toevoegen en die de look en feel van je site aanpassen.
+
+Momenteel zijn er 2 versies van Drupal in omloop die beiden nog onderhouden en ondersteund worden, Drupal 7 en Drupal 8. Drupal 7 kwam uit op 5 januari 2011 en is sinds dan uitgegroeid tot een volwaardig systeem met veel modules, veel documentatie en veel problemen die al opgelost zijn door de community. Drupal 8 is nieuwer en kwam uit op 19 november 2015. Hierdoor is er over Drupal 8 minder documentatie te vinden en zijn er momenteel nog minder modules ontwikkelt. Drupal 8 bevat nog steeds de kernideeën van Drupal maar is ontwikkelt met de gedacht om Drupal toegankelijker te maken voor zowel gebruikers als voor ontwikkelaars. Drupal 8 is beter in lijn met het web zoals Jonathan zei in zijn vergelijking tussen Drupal 7 en Drupal 8, \cite{Ramael2015}.
+
+Voor dit onderzoek wordt gebruik gemaakt van de laatste versie van Drupal 8 die is uitgekomen en dat is 8.5.6. Het doel van dit onderzoek is om het voor Dropsolid mogelijk te maken om front-end testen te schrijven voor hun Drupal 8 skelet, genaamd Rocketship, dus het is alleen maar logisch dat er gebruik wordt gemaakt van Drupal 8 en niet van Drupal 7. Rocketship is door Dropsolid ontwikkelt en is een Drupal 8 installatie die al modules, features en een basis thema bevat om het webontwikkelingsproces te versnellen.
+
+
+\section{All-in-one Tools}
+In dit hoofdstuk bespreek ik TestCafé en Cypress, de all-in-one tools die ik onderzocht en getest heb. Deze tools onderscheiden zich van de andere omdat er slechts één installatie nodig is. Je hebt dus geen andere tools zoals een WebDriver of een ander testing framework nodig voor het schrijven en uitvoeren van je testen.
+
+\subsection{TestCafé}
+\subsubsection{Implementatie}
+In dit deel wordt eerst beschreven hoe de installatie en configuratie van TestCafé v0.21.0 verliep. Vervolgens heb ik een test geschreven die op een standaard Drupal 8.5.6 installatie inlogt als administrator, een node van het type basic page aanmaakt met de titel: "Een nieuwe node", en tenslotte terug uitlogt. Deze test maakt gebruik van de verschillende menu's en knoppen om te navigeren en is ontworpen om zo precies mogelijk te lijken op het proces dat een gebruiker zou doorlopen indien hij hetzelfde wil doen. Tijdens deze test worden er vier asserties gemaakt. De eerste assertie is als de site geopend wordt of de titel van de pagina gelijk is aan: "Welcome to TestCafé". De tweede assertie is direct nadat ingelogd is of je op de account overview pagina bent door te controleren of de pagina titel gelijk is aan je gebruikersnaam, hier is dit admin. De derde assertie controleert of je na het aanmaken van een nieuwe node, je op die pagina terecht bent gekomen. De vierde assertie controleert of je tijdens het verwijderen van de node op een bevestigingspagina bent terecht gekomen.
+
+\paragraph{Installatie en configuratie}
+Door gebruik te maken van de package manager die Linux standaard voorziet heb ik met het commando: npm install --save-dev testcafe, testcafe lokaal geïnstalleerd in de hoofdmap van de Drupal installatie. Dit commando zorgt er ook voor dat de dependencies aan de npm dependencies lijst worden toegevoegd. Met het commando: npm install -g testcafe, heb ik testcafe ook globaal geïnstalleerd. Door zowel globaal als lokaal TestCafé te installeren kan ik gebruik maken van het commando: testcafe, om mijn testen uit te voeren.
+
+Daarna heb ik in diezelfde map een tests folder aangemaakt met daarin de test: testcafe.js. De test start met een before gedeelte waarin ingelogd wordt. Daarna volgt het testgedeelte waarin een basic pagina wordt en aangemaakt en verwijdert. Tenslotte wordt de test afgesloten met een after gedeelte waarin wordt uitgelogd.
+\lstinputlisting{testcafe.js}
+
+\subsection{Cypress}
+Cypress is de tweede 
+
+%% TODO: Hoe ben je te werk gegaan? Verdeel je onderzoek in grote fasen, en
+%% licht in elke fase toe welke stappen je gevolgd hebt. Verantwoord waarom je
+%% op deze manier te werk gegaan bent. Je moet kunnen aantonen dat je de best
+%% mogelijke manier toegepast hebt om een antwoord te vinden op de
+%% onderzoeksvraag.
+
+

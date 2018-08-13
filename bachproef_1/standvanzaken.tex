@@ -1,0 +1,170 @@
+\chapter{Stand van zaken}
+\label{ch:stand-van-zaken}
+\section{Belangrijkste testtypes voor webdevelopment}
+% Tip: Begin elk hoofdstuk met een paragraaf inleiding die beschrijft hoe
+% dit hoofdstuk past binnen het geheel van de bachelorproef. Geef in het
+% bijzonder aan wat de link is met het vorige en volgende hoofdstuk.
+
+% Pas na deze inleidende paragraaf komt de eerste sectiehoofding.
+Dit hoofdstuk bespreekt de belangrijkste testtypes voor webdevelopment: unit testen, integratie testen en functionele testen. In het volgende hoofdstuk wordt dieper ingegaan op het functionele testtype, het testtype dat het belangrijkst is voor dit onderzoek.
+
+\subsection{Unit testen}
+
+Unit testen zijn de soort testen die er voor zorgen dat elke individuele component van een applicatie werkt. Met een unit wordt een module, een functie of een specifiek stukje code van een applicatie bedoeld, \textcite{Elliott2016}.
+\newglossaryentry{dummy}
+{
+    name=Dummy,
+    description={Een dummy is een object dat nooit echt gebruikt wordt. Dummies worden meestal gebruikt voor het opvullen van parameterlijsten, \textcite{Fowler2007}}
+    plural={dummies}
+}
+\newglossaryentry{fake}
+{
+    name=Fake,
+    description={Een fake is een object dat werkende implementaties heeft maar dat gebruik maakt van een kortere weg waardoor ze niet ideaal zijn voor productie, \textcite{Fowler2007}}
+    plural={fakes}
+}
+\newglossaryentry{stub}
+{
+    name=Stub,
+    description={Een stub wordt tijdens het testen gebruikt om een standaard antwoord te geven op een oproep, \textcite{Fowler2007}}
+    plural={stubs}
+}
+\newglossaryentry{spy}
+{
+    name=Spy,
+    description={Een spy is een \gls{stub} die informatie geeft over wanneer die opgeroepen werd, \textcite{Fowler2007}}
+    plural={spies}
+}
+\newglossaryentry{mock}
+{
+    name=Mock,
+    description={Een mock is een object dat voorgeprogrammeerd werd met oproepen die ze verwachten te krijgen in gedachten, \textcite{Fowler2007}}
+    plural={mocks}
+}
+Een unit test zou simpel en snel moeten zijn en zou wanneer de test faalt duidelijk moeten zeggen waar de fout ligt en wat het probleem is. Om unit testen zo snel mogelijk te maken wordt er vaak gebruik gemaakt van \glspl{dummy}, \glspl{fake}, \glspl{stub}, \glspl{spy} en \glspl{mock}. 
+
+Unit testen zouden een vangnet moeten zijn die het grootste deel van de code omvat. Ze zouden ontwikkelaars het vertrouwen moeten geven om aanpassingen te maken omdat ze weten dat als er iets misloopt ze een duidelijk overzicht gaan krijgen van wat waar misliep, \textcite{Zilberfeld2013}.
+
+Unit testen houden zeker niet alle bugs tegen maar ze vergroten de kans dat een nieuw stuk code correct werkt en ze zorgen er voor dat het debuggen van code minder tijd in beslag neemt.
+
+\subsection{Integratie testen}
+
+Integratie testen zijn de soort testen die nagaan of de verschillende componenten (units) correct met elkaar samenwerken. Bij integratietesten komen alle verschillende componenten samen en worden die in hun geheel getest. Hier wordt dus geen gebruik gemaakt van \glspl{mock} zoals in unit tests, \textcite{Reselman2017}.
+
+Integratietesten maken vaak gebruik van \glspl{API} van derden zoals een API die dingen wegschrijft naar een databank. Integratietesten hebben hierdoor vaak een netwerk connectie nodig waardoor het uitvoeren van deze testen veel trager verloopt dan het uitvoeren van unit testen. Unit testen en integratietesten hou je het best gescheiden omdat het voor unit testen belangrijk is dat deze zo snel mogelijk zijn, \autocite{Elliott2016}.
+
+\subsection{Functionele testen}
+
+Functionele testen, ook wel browser testen, UI testen, front-end testen of end-to-end testen genoemd, zijn de soort testen die de applicatie testen vanuit het oogpunt van de gebruiker. Functionele testen worden ook wel end-to-end testen genoemd omdat de volledige applicatie van front-end tot back-end correct moet werken voor het slagen van deze testen.
+
+Functionele testen doorlopen de processen die de gebruiker ook doorloopt, zoals bijvoorbeeld het inloggen op een website, het navigeren naar een bepaalde pagina via het menu, het invullen van een formulier op een website,... Functionele testen krijgen hiervoor een input mee en een verwachting van wat de output zal zijn en gaat dan na of dit ook daadwerkelijk zo is.
+
+\section{Soorten tools voor het functioneel testen van een website}
+
+In dit gedeelte wordt onderscheid gemaakt tussen drie soorten tools die gebruikt worden bij het functioneel testen van een website. De eerste soort die besproken wordt is voor dit onderzoek het belangrijkst. In het volgende hoofdstuk wordt de onderverdeling van die eerste soort nader toegelicht en worden de tools die in dit onderzoek vergeleken worden, besproken.
+
+\subsection{Tools voor het maken van functionele testen}
+\newglossaryentry{WebDriver}
+{
+    name=WebDriver,
+    description={Een WebDriver is een framework voor de automatisatie van een browser. Een WebDriver maakt het mogelijk om gebruikersinteracties zoals het navigeren naar een pagina of het invullen van een formulier te automatiseren. Voorbeelden van WebDrivers zijn: Selenium WebDriver, ChromeDriver, GeckoDriver, Microsoft WebDriver,..}
+}
+\newglossaryentry{assertie}
+{
+    name=Assertie,
+    text=assertie,
+    description={Een assertie is een bewering. Tijdens het schrijven van testen worden asserties gemaakt over de output en vervolgens wordt nagegaan of de werkelijke output hetzelfde is als de beweerde output}
+    plural={asserties}
+}
+De eerste soort zijn de tools die je nodig hebt voor het maken van functionele testen. Deze soort wordt nog eens opgesplitst in drie verschillende categorieën: 
+\begin{itemize}
+\item De all-in-one tools, dit zijn de tools die volledig onafhankelijk werken en waarvoor je dus geen extra tools, frameworks of libraries nodig hebt.
+\item De tools waarvoor je nog een \gls{WebDriver} nodig hebt voor het kunnen uitvoeren van je testen.
+\item De libraries die nood hebben aan een testing framework en \gls{assertie} \gls{library} om als volwaardige testing tool te kunnen beschouwd worden.
+\end{itemize}
+Meer over deze verschillende soorten in het volgende deel.
+\subsection{Tools voor cross-browser testing}
+
+Deze soort zijn de tools die je nodig hebt om je functionele testen op verschillende besturingssystemen, browsers en formaten uit te voeren. Deze tools maken het volgende mogelijk: 
+\begin{itemize}
+\item Het testen van een website op verschillende browsers zoals Google Chrome, Mozilla Firefox, Internet Explorer, Safari, \ldots
+\item Het testen van een website op verschillende versies van browsers.
+\item Het testen van een website op browsers op verschillende besturingssystemen zoals Windows, MacOS, Linux, \ldots
+\item Het testen van een website op verschillende formaten zoals het smartphone formaat, tablet formaat, desktop formaat, \ldots
+\end{itemize}
+\newglossaryentry{Selenium-Grid}
+{
+    name=Selenium-Grid,
+    description={Een Selenium-Grid is een netwerk van verschillende browsers, versies van browsers, browsers op verschillende besturingssystemen en verschillende formaten van browsers die gebruik maken van het Selenium framework}
+}
+Deze tools bieden vaak nog extra diensten aan waarvan het in de cloud uitvoeren van testen een van de belangrijkste is. Dit zorgt er voor dat testen niet meer lokaal uitgevoerd worden maar wel op afstand in de cloud. Hierdoor is het parallel uitvoeren van testen mogelijk. Deze tools maken meestal gebruik van een \gls{Selenium-Grid}. In het volgende hoofdstuk wordt dieper ingegaan op Selenium en bibliotheken die Selenium uitbreiden.
+\newglossaryentry{snapshot}
+{
+    name=Snapshot,
+    text=snapshot,
+    description={Een snapshot is een afbeelding van de huidige staat van het systeem}
+    plural={snapshots}
+}
+
+Een andere dienst die deze tools kunnen aanbieden zijn het nemen van \glspl{snapshot} na het falen van een test. Aan de hand van deze snapshots kan je specifiek gaan debuggen omdat je de exacte staat hebt van het systeem waar de test faalde.
+
+Voorbeelden van deze soort tools zijn SauceLabs, BrowserStack, CrossBrowserTesting, Testingbot en BrowseEmAll.
+
+\subsection{Tools voor Behavior Driven Development}
+\newglossaryentry{BDD}{
+	type=\acronymtype,
+    name={BDD},
+    description={Behavior Driven Development},
+}
+\newglossaryentry{user story}
+{
+    name=User story,
+    description={Een user story is een beschrijving van wat een bepaalde gebruiker wil en waarom},
+    plural={user stories}
+}
+De laatste soort zijn optionele tools die een abstractielaag toevoegen bovenop de andere tools om Behavior Driven Development, gedragsgerichte ontwikkeling, mogelijk te maken. \gls{BDD} is een methodologie waarbij de focus ligt op het gedrag van de gebruiker. De verschillende gedragen van de gebruiker (scenario's)  worden meestal vastgelegd aan de hand van \glspl{user story}.
+
+Deze soort tools zijn optioneel en dienen enkel om het lezen en schrijven van testen te vereenvoudigen. Het voordeel van deze tools is dat ze het mogelijk maken voor niet-programmeurs om testen te schrijven. Het nadeel is dat ze extra complexiteit toevoegen die vaak overbodig is.
+
+Voorbeelden van dergelijke tools zijn Cucumber.js en CodeceptJS.
+
+\section{Tools voor het maken van functionele testen}
+\subsection{All-in-one tools}
+
+Dit zijn tools die geen frameworks of libraries van derden nodig hebben om te werken, deze tools zijn zelfstandig en bevatten het hele pakket. Het voordeel van deze tools is dat je je testen kan schrijven en uitvoeren zonder het downloaden van extra software. Ook de extra complexiteit die wordt toegevoegd bij de integratie van verschillende tools met elkaar valt hier dus weg. De twee die in dit onderzoek besproken en vergeleken worden van dit type zijn: TestCafé en Cypress.
+
+\subsubsection{TestCafé}
+TestCafé \autocite{Testcafe}, niet te verwarren met TestCafé Studio, is een  gratis opensource node.js tool voor het automatiseren van end-to-end web testen ontwikkelt door DevExpress. TestCafé Studio daarentegen is een IDE die ook door DevExpress ontwikkelt werd en die het mogelijk maakt om testen te maken zonder code te moeten schrijven. TestCafé Studio is betalend en hierop wordt in dit onderzoek niet verder ingegaan. 
+
+TestCafé werkt op volgende besturingssystemen: Windows, MacOS en Linux, en kan gebruik maken van volgende browsers: Google Chrome, Internet Explorer, Microsoft Edge, Mozilla Firefox, Safari, Android browser, Safari. Je kan ook gebruik maken van programma's zoals SauceLabs, BrowserStack of CrossBrowserTesting voor je testen in de cloud op meerdere browsers en formaten uit te voeren.
+
+Het schrijven van testen met TestCafé gebeurt in JavaScript of TypeScript. TypeScript is een superset van JavaScript dit wil zeggen dat JavaScript een deelverzameling is van TypeScript en beiden kunnen door elkaar gebruikt worden. Een kenmerk van TestCafé is dat het een manier implementeert om slim te testen. Je kan wachttijden instellen voor elementen om te verschijnen op de pagina. Van zodra het element verschijnt gaat de test verder en als de wachttijd overschreden wordt dan faalt de test. Dit zorgt er voor dat je geen verplichte slaaptijden moet inbouwen om te wachten op elementen die niet direct tevoorschijn komen. De code zelf is goed leesbaar omdat de API die gebruikt wordt voor elementen te selecteren en asserties te maken eenvoudig, leesbaar en logisch is. Verder kan je ook gebruik maken van het Page Object patroon om je testen te vereenvoudigen en dubbele code te vermijden. Het Page Object patroon laat je toe om de pagina die je wil testen te abstraheren en in de code van de test te referen naar elementen van de pagina die je wil testen. 
+
+Een ander belangrijk kenmerk van TestCafé is de mogelijkheid om testen parallel uit te voeren. Het is mogelijk om meerdere instanties van dezelfde browser of van verschillende browsers op te zetten. Vervolgens wordt bij het uitvoeren van je \gls{testsuite} je testen over deze verschillende instanties verdeeld.
+
+TestCafé rapporteert automatisch alle JavaScript errors die tegen gekomen worden tijdens het uitvoeren van een test op de verschillende webpagina's die bezocht werden. 
+
+TestCafé heeft ook een plugin genaam TestCafé live waarmee je testen kan schrijven en aanpassen terwijl deze worden uitgevoerd. Van zodra je een aanpassing hebt gemaakt stopt het de huidige test indien die nog bezig was en start het de test gewoon opnieuw. Dit vereenvoudigt het proces van testen schrijven en debuggen sterk. 
+
+Om TestCafé te integreren in je \gls{CI} systeem is er op de site van TestCafé zelf voldoende documentatie hoe je dit moet doen en zijn er ook door de community plugins ontwikkelt om dit proces te vereenvoudigen. Op de site van TestCafé zelf vind je documentatie voor de implementatie in volgende continue integratie systemen: AppVeyor, CircleCI, Jenkins, TeamCity en Travis. TestCafé testen kunnen ook uitgevoerd worden tijdens het ontwikkelingsproces door je testen via plugins toe te voegen aan Gulp of Grunt. Gulp en Grunt zijn automatisatie tools die voor vele verschillende doeleinden kunnen gebruikt worden. Een voorbeeld hiervan is het automatisch compileren van SASS code naar CSS code bij het opslaan van een SASS bestand.
+\subsubsection{Cypress}
+
+\subsection{Tools die nood hebben aan en WebDriver}
+
+Dit zijn frameworks die hun eigen syntax en tools voor \glspl{assertie} hebben maar die nog geen \gls{WebDriver} hebben voor het uitvoeren van deze testen. Voor het uitvoeren van testen met deze soort tools moet je dus nog een WebDriver van een derde partij voorzien zoals bijvoorbeeld de Selenium WebDriver, ChromeDriver of GeckoDriver. Voorbeelden van deze soort zijn Nightwatch en WebdriverIO.
+
+\subsection{Libraries voor webautomatisering}
+
+Dit zijn libraries die in eerste plaats niet specifiek dienen voor testen maar wel voor webautomatisering. Deze libraries kunnen in combinatie met andere tools en frameworks gebruikt worden voor testen. Het eerste dat deze soort tools nodig heeft is een testing framework, de populairste voorbeelden hiervan zijn Mocha en Jasmine. Het tweede dat deze soort tools nodig heeft is een library voor asserties, het populairste voorbeeld hiervan is Chai. Aan de hand van deze twee soorten tools kunnen libraries zoals Puppeteer en Nightmare fungeren als een volwaardig test framework.
+\section{}
+In dit hoofdstuk bespreek ik de verschillende tools, frameworks en libraries die ik getest heb en die in het volgende hoofdstuk vergeleken worden. In dit hoofdstuk ga ik dieper in op de sterktes, zwaktes en mogelijke limitaties van de verschillende tools.
+
+
+%Dit hoofdstuk bevat je literatuurstudie. De inhoud gaat verder op de inleiding, maar zal het onderwerp van de bachelorproef *diepgaand* uitspitten. De bedoeling is dat de lezer na lezing van dit hoofdstuk helemaal op de hoogte is van de huidige stand van zaken (state-of-the-art) in het onderzoeksdomein. Iemand die niet vertrouwd is met het onderwerp, weet er nu voldoende om de rest van het verhaal te kunnen volgen, zonder dat die er nog andere informatie moet over opzoeken \autocite{Pollefliet2011}.
+
+%Je verwijst bij elke bewering die je doet, vakterm die je introduceert, enz. naar je bronnen. In \LaTeX{} kan dat met het commando \texttt{$\backslash${textcite\{\}}} of \texttt{$\backslash${autocite\{\}}}. Als argument van het commando geef je de ``sleutel'' van een ``record'' in een bibliografische databank in het Bib\TeX{}-formaat (een tekstbestand). Als je expliciet naar de auteur verwijst in de zin, gebruik je \texttt{$\backslash${}textcite\{\}}.
+%Soms wil je de auteur niet expliciet vernoemen, dan gebruik je \texttt{$\backslash${}autocite\{\}}. In de volgende paragraaf een voorbeeld van elk.
+
+%\textcite{Knuth1998} schreef een van de standaardwerken over sorteer- en zoekalgoritmen. Experten zijn het erover eens dat cloud computing een interessante opportuniteit vormen, zowel voor gebruikers als voor dienstverleners op vlak van informatietechnologie~\autocite{Creeger2009}.
+
+%\lipsum[7-20]

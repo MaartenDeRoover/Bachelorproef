@@ -1,0 +1,93 @@
+%%=============================================================================
+%% Inleiding
+%%=============================================================================
+
+\chapter{Inleiding}
+\label{ch:inleiding}
+
+%De inleiding moet de lezer net genoeg informatie verschaffen om het onderwerp te begrijpen en in te zien waarom de onderzoeksvraag de moeite waard is om te onderzoeken. In de inleiding ga je literatuurverwijzingen beperken, zodat de tekst vlot leesbaar blijft. Je kan de inleiding verder onderverdelen in secties als dit de tekst verduidelijkt. Zaken die aan bod kunnen komen in de inleiding~\autocite{Pollefliet2011}:
+
+%\begin{itemize}
+%  \item context, achtergrond
+%  \item afbakenen van het onderwerp
+%  \item verantwoording van het onderwerp, methodologie
+%  \item probleemstelling
+%  \item onderzoeksdoelstelling
+%  \item onderzoeksvraag
+%  \item \ldots
+%\end{itemize}
+\newglossaryentry{tool}
+{
+    name=Tool,
+    description={Een software tool is een programma dat gebruikt wordt voor de ontwikkeling, herstelling of verbetering van een ander programma, \textcite{Tool2004}}
+    plural={tools}
+}
+\newglossaryentry{framework}
+{
+    name=Framework,
+    description={Een framework is een verzameling van \glspl{library} die gebruikt kunnen worden aan de hand van een \gls{API}, \textcite{Framework}}
+    plural={frameworks}
+}
+\newglossaryentry{library}
+{
+    name=Library,
+    description={Een library is een verzameling van code die gebruikt wordt om programma's en applicaties te maken, \textcite{Library}}
+    plural={libraries}
+}
+
+\newglossaryentry{API}{
+	type=\acronymtype,
+    name={API},
+    description={Application Programming Interface},
+    plural={API's}
+    first={API \glsadd{APIG}},
+    see=[Glossary:]{APIG}
+}
+\newglossaryentry{APIG}{
+	name={API},
+    description={Een Application Programming Interface is een set aan definities waarmee softwareprogramma's onderling kunnen communiceren, \textcite{Tuil2011}}
+}
+
+\section{Probleemstelling}
+\label{sec:probleemstelling}
+Tegenwoordig bestaat er een waaier aan verschillende \glspl{tool}, \glspl{framework} en \glspl{library} voor het functioneel testen van een website. Deze hebben elk hun eigen implementatie en vaak ook hun eigen filosofie in verband met testen. 
+
+Enerzijds heb je de tools die al langer bestaan en gaandeweg een grote community hebben opgebouwd. Deze soort tools zijn over het algemeen goed gedocumenteerd en is veel informatie over te vinden. Hierdoor is de instap vaak eenvoudiger dan de tools die minder lang bestaan.
+
+Anderzijds heb je de tools die recenter zijn ontwikkelt en die nog geen grote community hebben. Deze soort tools zijn  vaak ontwikkelt met één specifieke toepassing in gedachten of doen dingen vanaf de basis anders waardoor ze beter kunnen zijn dan de oudere tools. 
+
+Deze waaier aan verschillende tools maakt het voor Dropsolid niet makkelijk om de juiste keuze te maken.
+
+
+%Uit je probleemstelling moet duidelijk zijn dat je onderzoek een meerwaarde heeft voor een concrete doelgroep. De doelgroep moet goed gedefinieerd en afgelijnd zijn. Doelgroepen als ``bedrijven,'' ``KMO's,'' systeembeheerders, enz.~zijn nog te vaag. Als je een lijstje kan maken van de personen/organisaties die een meerwaarde zullen vinden in deze bachelorproef (dit is eigenlijk je steekproefkader), dan is dat een indicatie dat de doelgroep goed gedefinieerd is. Dit kan een enkel bedrijf zijn of zelfs één persoon (je co-promotor/opdrachtgever).
+
+\section{Onderzoeksvraag}
+\label{sec:onderzoeksvraag}
+Dit onderzoek wordt in opdracht van Dropsolid uitgevoerd dus de onderzoeksvraag is gebaseerd op hun specifieke toepassing. De onderzoeksvraag luidt als volgt: Welke op Javascript gebaseerde tools voor het schrijven van functionele testen kan een KMO gespecialiseerd in Drupal het best gebruiken?
+
+%Wees zo concreet mogelijk bij het formuleren van je onderzoeksvraag. Een onderzoeksvraag is trouwens iets waar nog niemand op dit moment een antwoord heeft (voor zover je kan nagaan). Het opzoeken van bestaande informatie (bv. ``welke tools bestaan er voor deze toepassing?'') is dus geen onderzoeksvraag. Je kan de onderzoeksvraag verder specifiëren in deelvragen. Bv.~als je onderzoek gaat over performantiemetingen, dan 
+
+\section{Onderzoeksdoelstelling}
+\label{sec:onderzoeksdoelstelling}
+Het hoofddoel van dit onderzoek is om de verschillende op javascript gebaseerde tools voor het schrijven van functionele testen te vergelijken en de selectie te maken voor de tool of combinatie van tools die het beste bij Dropsolid passen. Een bijkomend doel is om deze tool of combinatie van tools te gebruiken om op een nieuwe installatie van Dropsolid hun Drupal 8 skelet, genaamd Rocketship, de voorgeprogrammeerde \gls{Paragraph Types} aan te maken en deze te testen.
+
+
+%Wat is het beoogde resultaat van je bachelorproef? Wat zijn de criteria voor succes? Beschrijf die zo concreet mogelijk.
+
+\section{Opzet van deze bachelorproef}
+\label{sec:opzet-bachelorproef}
+
+% Het is gebruikelijk aan het einde van de inleiding een overzicht te
+% geven van de opbouw van de rest van de tekst. Deze sectie bevat al een aanzet
+% die je kan aanvullen/aanpassen in functie van je eigen tekst.
+
+De rest van deze bachelorproef is als volgt opgebouwd:
+
+In Hoofdstuk~\ref{ch:stand-van-zaken} wordt de huidige stand van zaken in verband met het funtioneel testen van websites besproken aan de hand van een literatuurstudie.
+
+In Hoofdstuk~\ref{ch:methodologie} worden de tools die in dit onderzoek getest werden toegelicht en hoe deze getest werden.
+
+% TODO: Vul hier aan voor je eigen hoofstukken, één of twee zinnen per hoofdstuk
+
+In Hoofdstuk~\ref{ch:conclusie}, tenslotte, wordt de conclusie gegeven en wordt toegelicht welke tool verkozen werd en waarom deze voor Dropsolid de beste is.
+
