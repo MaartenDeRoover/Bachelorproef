@@ -129,6 +129,23 @@ Deze soort tools zijn optioneel en dienen enkel om het lezen en schrijven van te
 Voorbeelden van dergelijke tools zijn Cucumber.js en CodeceptJS.
 
 \section{Tools voor het maken van functionele testen}
+In dit deel worden eerst de tools, frameworks en libraries besproken die een ondersteunende rol hebben voor de tools die in dit onderzoek getest worden. Daarna worden per categorie de tools besproken die in het volgende hoofdstuk, Methodologie, getest worden.
+
+\subsection{Ondersteunende tools, frameworks en libraries}
+
+\subsubsection{ChromeDriver}
+ChromeDriver is een opensource tool voor het geautomatiseerd testen van websites. Concreet wil dit zeggen dat ChromeDriver een standalone server is die gebruik maakt van een Chrome of Chromium browser voor het uitvoeren van geautomatiseerde testen. ChromeDriver is beschikbaar op Windows, MacOS en Linux, dit onderzoek maakt gebruik van ChromeDriver 2.41, \textcite{ChromeDriver2018}.
+
+\subsubsection{Mocha}
+Mocha is een opensource Node.js Javascript framework voor het maken van asynchrone testen, \autocite{Mocha}. Mocha wordt in dit onderzoek gebruikt als standaard testing framework voor de tools die nog geen testing framework hebben.
+
+\subsubsection{Chai}
+Chai is een opensource Node.js library voor het maken van asserties in testen. Met Chai is het mogelijk om zowel BDD als TDD asserties te maken, \autocite{Chai}. Chai wordt in dit onderzoek gebruikt als standaar assertie library voor de tools die dit nog niet bevatten.
+
+\subsection{Electron}
+
+Electron is een framework dat gebruik maakt van Chromium en Node.js en dat dient voor het maken van applicaties met webtechnologieën als JavaScript, HTML en CSS. Electron is opensource en beschikbaar op zowel Windows, MacOS als Linux.
+
 \subsection{All-in-one tools}
 
 Dit zijn tools die geen frameworks of libraries van derden nodig hebben om te werken, deze tools zijn zelfstandig en bevatten het hele pakket. Het voordeel van deze tools is dat je je testen kan schrijven en uitvoeren zonder het downloaden van extra software. Ook de extra complexiteit die wordt toegevoegd bij de integratie van verschillende tools met elkaar valt hier dus weg. De twee die in dit onderzoek besproken en vergeleken worden van dit type zijn: TestCafé en Cypress.
@@ -147,18 +164,83 @@ TestCafé rapporteert automatisch alle JavaScript errors die tegen gekomen worde
 TestCafé heeft ook een plugin genaam TestCafé live waarmee je testen kan schrijven en aanpassen terwijl deze worden uitgevoerd. Van zodra je een aanpassing hebt gemaakt stopt het de huidige test indien die nog bezig was en start het de test gewoon opnieuw. Dit vereenvoudigt het proces van testen schrijven en debuggen sterk. 
 
 Om TestCafé te integreren in je \gls{CI} systeem is er op de site van TestCafé zelf voldoende documentatie hoe je dit moet doen en zijn er ook door de community plugins ontwikkelt om dit proces te vereenvoudigen. Op de site van TestCafé zelf vind je documentatie voor de implementatie in volgende continue integratie systemen: AppVeyor, CircleCI, Jenkins, TeamCity en Travis. TestCafé testen kunnen ook uitgevoerd worden tijdens het ontwikkelingsproces door je testen via plugins toe te voegen aan Gulp of Grunt. Gulp en Grunt zijn automatisatie tools die voor vele verschillende doeleinden kunnen gebruikt worden. Een voorbeeld hiervan is het automatisch compileren van SASS code naar CSS code bij het opslaan van een SASS bestand.
-\subsubsection{Cypress}
 
-\subsection{Tools die nood hebben aan en WebDriver}
+\subsubsection{Cypress}
+Cypress is de tweede all-in-one tool die besproken wordt voor het maken van functionele testen en is net zoals TestCafé opensource en heeft een nieuwe architectuur die niet bovenop Selenium werd gebouwd. Cypress is opnieuw het volledige pakket en is dus niet afhankelijk van servers of drivers voor de installatie of configuratie.
+
+Cypress testen worden volledig in JavaScript geschreven en Cypress heeft zijn eigen API voor het automatiseren van de browser of voor de interne configuratie van Cypress te besturen. Cypress heeft ook een automatisch functie ingebouwd om te wachten op elementen om te verschijnen of om asserties te maken. Hierdoor moet je geen sleeps inbouwen en spaar je tijd uit.
+
+De sterkte van Cypress zit hem in de eenvoud om testen te schrijven en debuggen. Dit heeft enkele redenen, de eerste is dat je het uitvoeren van Cypress testen live kan meevolgen en dat indien je een aanpassing maakt de test opnieuw start. Cypress heeft een zeer gebruiksvriendelijke eigen UI voor het uitvoeren en meevolgen van testen. De tweede reden is dat tijdens het live uitvoeren van testen je de logs van de command line in het linkerdeel van de UI kan zien waardoor je direct ziet als er iets misloopt met de samenhorende foutmelding. De derde reden is dat Cypress automatisch snapshots maakt tijdens het uitvoeren van testen. Deze worden vervolgens in de command log geplaatst en kan je op elke stap precies zien wat er gebeurt. De vierde en laatste reden is dat het met Cypress mogelijk is om screenshots te nemen nadat een test faalde of om de volledige uitvoering van de test te filmen. Hierdoor kan je nadat de test is uitgevoerd en gefaalt precies teruggaan naar het punt waar de test faalde om zo specifiek te debuggen.
+
+Een ander kenmerk van Cypress is de mogelijkheid om gebruik te maken van spies of stubs zoals in unit testen. Stubs kan je gebruiken voor je netwerk verkeer zodat je je eigen server niet moet gebruiken.
+
+De mogelijkheden om Cypress in te bouwen in je CI systeem zijn zeer ruim. Zo is Cypress al succesvol geïmplementeerd geweest in volgende systemen: Jenkins, TravisCI, CircleCI, CodeShip, GitLab, BuildKite, AppVeyor, Semaphore, Concourse, Solano, Docker.
+
+Momenteel is cross-browser testing nog niet mogelijk met Cypress. Enkel varianten van de Chrome familie worden momenteel ondersteund. Cypress heeft wel plannen om in de toekomst meer browsers te ondersteunen, \textcite{Mann2017}. Anderzijds kan over het nut van cross-browser testen ook gediscussieerd worden. Cross-browser testen vergroot de kost en infrastructuur nodig voor het testen erg terwijl dit het vertrouwen slechts licht vergroot. Ook de kans dat een fout browserspecifiek is is zeer klein, \textcite{Mann2018}.
+
+Parallel testen is ook niet mogelijk met enkel de Cypress client. Wel kan gebruik gemaakt worden van Docker om verschillende Docker containers op te zetten die parallel draaien en met Cypress testen uitvoeren.
+
+\subsection{Frameworks die nood hebben aan en WebDriver}
 
 Dit zijn frameworks die hun eigen syntax en tools voor \glspl{assertie} hebben maar die nog geen \gls{WebDriver} hebben voor het uitvoeren van deze testen. Voor het uitvoeren van testen met deze soort tools moet je dus nog een WebDriver van een derde partij voorzien zoals bijvoorbeeld de Selenium WebDriver, ChromeDriver of GeckoDriver. Voorbeelden van deze soort zijn Nightwatch en WebdriverIO.
+
+\subsubsection{Nightwatch}
+
+Nightwatch is een opensource Node.js framework voor het maken van functionele testen. Voor het uitvoeren van testen met Nightwatch heb je echter nood aan een WebDriver, Nightwatch ondersteunt ChromeDriver, GeckoDriver en Selenium Standalone Server.
+
+Nightwatch maakt gebruik van de W3C WebDriver API voor het uitvoeren van commando's en asserties op DOM elementen. Hiermee kan je gebruik maken van CSS en XPATH selectors om elementen op de pagina te selecteren.
+
+Het parallel uitvoeren van tests is mogelijk met Nightwatch, zo kan je verschillende instanties van dezelfde browser of van verschillende browsers aanmaken. Het aantal parallelle testen dat kan uitgevoerd worden is gelijk aan het aantal CPU's, heb je 4 CPU's dan kan je maximaal 4 testen parallel uitvoeren.
+
+Een ander kenmerk van Nightwatch is dat het al een BDD library bevat en je dus geen gebruik moet maken van externe libraries zoals Cucumber.js of Codecept.js om Behavior Driven testen te schrijven.
+
+Op vlak van cross-browser testing is de integratie van Nightwatch mogelijk met alle bekende cloud services zoals SauceLabs, BrowserStack, TestingBot of CrossBrowserTesting. Momenteel is Nightcloud, een cloud service specifiek voor Nightwatch, in ontwikkeling, \textcite{Nightcloud2017}.
+
+Continue integratie met Nightwatch is mogelijk met alle bekende CI systemen zoals Teamcity, Jenkins, Hudson, CircleCI,... Voor de integratie van Nightwatch in het ontwikkelingsproces zijn plugins beschikbaar voor bijvoorbeeld de integratie met Gulp of Grunt.
+
+Nightwatch wordt door de Drupal community ondersteund en is momenteel in de core van de pre-release van Drupal 8.6 opgenomen. Voordien werd door de Drupal community voornamelijk gebruik gemaakt van PhantomJS voor functionele testen maar nu PhantomJS niet meer onderhouden wordt is de community overgestapt op Nightwatch.
+
+\subsubsection{WebdriverIO}
+WebdriverIO is een opensource Node.js testing framework voor het maken van functionele testen. In tegenstelling tot Nightwatch laat WebdriverIO je BDD of TDD testing framework zelf kiezen. De frameworks die compatibel zijn met WebdriverIO en waaruit je dus kan kiezen zijn: Mocha, Jasmine en Cucumber. Deze testing frameworks worden aan de hand van Node.js adapter modules verbonden met WebdriverIO.
+
+Standaard is het enkel mogelijk om testen in JavaScript te schrijven maar aan de hand van een Node pakket kan de functionaliteit van WebdriverIO uitgebreid worden om ook TypeScript te kunnen gebruiken. Elementen zijn met WebdriverIO gemakkelijk te selecteren met de CSS of XPATH selectors. WebdriverIO implementeert \$ en \$\$ functies die geketend worden om makkelijker elementen te selecteren. Dit kan gebruikt worden ter vervanging van ingewikkelde XPATH selectors.
+
+Tijdens het uitvoeren van testen wordt er een verslag uitgeprint in de command line  over hoe deze testen verliepen. Dit verslag is aanpasbaar en er is keuze uit 10 verschillende reporters die de testverslagen anders uitprinten. Het is ook mogelijk om een zelfgemaakte reporter te gebruikten. WebdriverIO voorziet ook standaard een service die snapshots maakt bij het falen van testen.
+
+Het parallel uitvoeren van testen is mogelijk en in het configuratiebestand van WebdriverIO kan je definiëren welke verschillende browsers er gebruikt moeten worden en hoeveel instanties van deze browsers.
+
+Voor de ontwikkeling en het debuggen van testen voorziet WebdriverIO een REPL interface, hiermee is mogelijk om commando's uit te voeren in de command line en rechtstreeks in de browser te zien wat er gebeurt.
+
+Op vlak van Cross-Browser testing voorziet WebdriverIO documentatie voor de integratie met de cloud services SauceLabs, Browserstack en TestingBot. Om WebdriverIO aan je lokaal ontwikkelingsproces toe te voegen bestaan er plugins voor de integratie met Gulp en voor de integratie met Grunt.
+
+Op vlak van continue integratie is het mogelijk om WebdriverIO te integreren in je CI systeem. WebdriverIO voorziet enkel documentatie voor de integratie in Jenkins maar er zijn online voorbeelden te vinden over hoe de integratie verloop in andere systemen zoals TravisCI.
 
 \subsection{Libraries voor webautomatisering}
 
 Dit zijn libraries die in eerste plaats niet specifiek dienen voor testen maar wel voor webautomatisering. Deze libraries kunnen in combinatie met andere tools en frameworks gebruikt worden voor testen. Het eerste dat deze soort tools nodig heeft is een testing framework, de populairste voorbeelden hiervan zijn Mocha en Jasmine. Het tweede dat deze soort tools nodig heeft is een library voor asserties, het populairste voorbeeld hiervan is Chai. Aan de hand van deze twee soorten tools kunnen libraries zoals Puppeteer en Nightmare fungeren als een volwaardig test framework.
-\section{}
-In dit hoofdstuk bespreek ik de verschillende tools, frameworks en libraries die ik getest heb en die in het volgende hoofdstuk vergeleken worden. In dit hoofdstuk ga ik dieper in op de sterktes, zwaktes en mogelijke limitaties van de verschillende tools.
 
+\subsubsection{Nightmare}
+
+Nightmare is een library voor browser automatisatie origineel ontwikkelt door Segment maar later opensource geworden. Met de API van Nightmare is het mogelijk om gebruikersinteracties na te bootsen met simpele commando's zoals goto, type, click,... Nightmare werd oorspronkelijk ontwikkelt voor het automatiseren van taken op een website maar wordt vooral gebruikt voor het functioneel testen van websites en voor het crawlen van websites.
+
+Nightmare testen worden geschreven in JavaScript.
+
+Nightmare maakt gebruik van Electron en Electron maakt gebruik van Chromium. Dit wil zeggen dat testen of programma's die met Nightmare geschreven worden, uitgevoerd worden in een Chromium omgeving.
+
+Twee handige tools voor het functioneel testen van een website met Nightmare zijn Niffy en Daydream. Niffy is een tool die bovenop Nightmare gebouwd is en die je helpt om veranderingen of bugs in de UI te ontdekken. Daydream is een Chrome extensie waarmee acties die uitgevoerd worden op een website omgezet worden in een Nightmare of Puppeteer script.
+
+Op vlak van cross-browser testen zijn er geen mogelijkheden met Nightmare, Nightmare is enkel ontwikkelt voor de automatisatie van Electron.
+
+De mogelijkheden in verband met het parallel uitvoeren van testen en continue integratie hangen niet van Nightmare af maar hangen wel af van het gebruikte testing framework. Concreet wil dit zeggen dat als het testing framework bijvoorbeeld geïntegreerd kan worden in Jenkins en de testen parallel kan uitvoeren dan kan dit ook met Nightmare.
+
+\subsubsection{Puppeteer}
+Puppeteer is een Node library voor het automatiseren van een Chrome of Chromium browser. Standaard voert Puppeteer een headless versie van Chrome of Chromium uit, maar er kan ingesteld worden dat een volledige zichtbare versie van Chrome of Chromium moet uitgevoerd worden. Puppeteer kan gebruikt worden voor alles waarvoor browser automatisatie vereist is, maar wordt voornamelijk gebruikt voor het crawlen van websites en voor het functioneel testen van websites.
+
+Een van de standaard ingebouwde functies van Puppeteer voorziet de mogelijkheid om snapshots te nemen.
+
+Op vlak van cross-browser testen zijn er geen mogelijkheden met Puppeteer, Puppeteer is enkel ontwikkelt voor de automatisatie van Chrome of Chromium. Wel kunnen cloud services gebruikt worden om testen in de cloud uit te voeren.
+
+Het parallel uitvoeren van testen is mogelijk met Puppeteer maar wordt niet standaard voorzien. Deze functionaliteit kan wel gerealiseerd worden met tools die community heeft ontwikkelt zoals bijvoorbeeld de puppeteer-cluster library. Het integreren van Puppeteer in je CI systeem is mogelijk maar hier voorziet Puppeteer geen documentatie over.
 
 %Dit hoofdstuk bevat je literatuurstudie. De inhoud gaat verder op de inleiding, maar zal het onderwerp van de bachelorproef *diepgaand* uitspitten. De bedoeling is dat de lezer na lezing van dit hoofdstuk helemaal op de hoogte is van de huidige stand van zaken (state-of-the-art) in het onderzoeksdomein. Iemand die niet vertrouwd is met het onderwerp, weet er nu voldoende om de rest van het verhaal te kunnen volgen, zonder dat die er nog andere informatie moet over opzoeken \autocite{Pollefliet2011}.
 

@@ -71,23 +71,217 @@ Momenteel zijn er 2 versies van Drupal in omloop die beiden nog onderhouden en o
 
 Voor dit onderzoek wordt gebruik gemaakt van de laatste versie van Drupal 8 die is uitgekomen en dat is 8.5.6. Het doel van dit onderzoek is om het voor Dropsolid mogelijk te maken om front-end testen te schrijven voor hun Drupal 8 skelet, genaamd Rocketship, dus het is alleen maar logisch dat er gebruik wordt gemaakt van Drupal 8 en niet van Drupal 7. Rocketship is door Dropsolid ontwikkelt en is een Drupal 8 installatie die al modules, features en een basis thema bevat om het webontwikkelingsproces te versnellen.
 
+\section{Testscenario}
+Om de verschillende tools te kunnen vergelijken op vlak van gebruiksvriendelijkheid, syntax en uitvoeringstijd werd er met elke tool een test geschreven die hetzelfde doet. Voor het uitvoeren van de test werd er steeds gebruik gemaakt van de ChromeDriver omdat deze voor alle tools beschikbaar was. De uitvoeringstijden die gemeten worden moeten niet gezien worden als een benchmark maar eerder als een proof of concept om de tools te kunnen vergelijken.
 
-\section{All-in-one Tools}
-In dit hoofdstuk bespreek ik TestCafé en Cypress, de all-in-one tools die ik onderzocht en getest heb. Deze tools onderscheiden zich van de andere omdat er slechts één installatie nodig is. Je hebt dus geen andere tools zoals een WebDriver of een ander testing framework nodig voor het schrijven en uitvoeren van je testen.
+De test is geschreven met als doel het proces dat een normale gebruiker zou doorlopen zo goed mogelijk na te bootsen. Dit gebeurt door gebruik te maken van de menu's om te navigeren en in te loggen en geen gebruik te maken van kortere wegen om het testen te versnellen.
 
-\subsection{TestCafé}
-\subsubsection{Implementatie}
-In dit deel wordt eerst beschreven hoe de installatie en configuratie van TestCafé v0.21.0 verliep. Vervolgens heb ik een test geschreven die op een standaard Drupal 8.5.6 installatie inlogt als administrator, een node van het type basic page aanmaakt met de titel: "Een nieuwe node", en tenslotte terug uitlogt. Deze test maakt gebruik van de verschillende menu's en knoppen om te navigeren en is ontworpen om zo precies mogelijk te lijken op het proces dat een gebruiker zou doorlopen indien hij hetzelfde wil doen. Tijdens deze test worden er vier asserties gemaakt. De eerste assertie is als de site geopend wordt of de titel van de pagina gelijk is aan: "Welcome to TestCafé". De tweede assertie is direct nadat ingelogd is of je op de account overview pagina bent door te controleren of de pagina titel gelijk is aan je gebruikersnaam, hier is dit admin. De derde assertie controleert of je na het aanmaken van een nieuwe node, je op die pagina terecht bent gekomen. De vierde assertie controleert of je tijdens het verwijderen van de node op een bevestigingspagina bent terecht gekomen.
+De test start met het inloggen als administrator op een Drupal 8.5.6 website die reeds vooraf geïnstalleerd werd. Vervolgens wordt er een nieuwe node aangemaakt van het type "basic page" met de title "Een nieuwe node". Daarna wordt deze node verwijdert en ten slotte wordt er uigelogd. Tijdens deze test worden er vier asserties gemaakt om na te gaan of de test succesvol verloopt. De eerste assertie is direct bij het optarten van de site om te controleren of de correcte site is geopend en of deze correct geopend is door de titel van de pagina te controleren. De tweede assertie controleert of je correct bent ingelogd door na het in te loggen te controleren of je op de account overzichtspagina bent terecht gekomen. De derde assertie gaat na of de node correct is aangemaakt door te controleren of je op de node pagina bent terecht gekomen. De laatste assertie controleert of je tijdens het verwijderen van de pagina op een bevestigingspagina terecht komt.
 
-\paragraph{Installatie en configuratie}
-Door gebruik te maken van de package manager die Linux standaard voorziet heb ik met het commando: npm install --save-dev testcafe, testcafe lokaal geïnstalleerd in de hoofdmap van de Drupal installatie. Dit commando zorgt er ook voor dat de dependencies aan de npm dependencies lijst worden toegevoegd. Met het commando: npm install -g testcafe, heb ik testcafe ook globaal geïnstalleerd. Door zowel globaal als lokaal TestCafé te installeren kan ik gebruik maken van het commando: testcafe, om mijn testen uit te voeren.
+Voor het surfen naar de website te vereenvoudigen werd een apache2 config bestand aangemaakt voor elk project dat in de /etc/apache2/sites-available en /etc/apache2/sites-enabled terecht komt. Zo een bestand ziet er als volgt uit:  
 
-Daarna heb ik in diezelfde map een tests folder aangemaakt met daarin de test: testcafe.js. De test start met een before gedeelte waarin ingelogd wordt. Daarna volgt het testgedeelte waarin een basic pagina wordt en aangemaakt en verwijdert. Tenslotte wordt de test afgesloten met een after gedeelte waarin wordt uitgelogd.
-\lstinputlisting{testcafe.js}
+\begin{lstlisting}
+<VirtualHost *:80>
 
-\subsection{Cypress}
-Cypress is de tweede 
+  ServerName PROJECT_NAAM
+  ServerAlias *.PROJECT_NAAM
 
+  DocumentRoot /websites/PROJECT_NAAM
+
+  <Directory /websites/PROJECT_NAAM>
+     Options Indexes FollowSymLinks MultiViews
+     AllowOverride All
+     Require all granted
+  </Directory>
+
+   ErrorLog /var/log/apache2/PROJECT_NAAM_error.log
+   LogLevel error
+   CustomLog /var/log/apache2/PROJECT_NAAM_access.log combined
+   
+</VirtualHost>
+\end{lstlisting}
+
+In het hosts bestand in de /etc/ folder werd volgende lijn toegoevoegd: 127.0.0.1   PROJECT\_NAAM
+
+Deze aanpassingen maken het mogelijk om lokaal via de projectnaam naar de website te surfen.
+
+Verder wordt elke tool geïnstalleerd via npm en hiervoor moet eerst een package.json bestand aangemaakt worden in de hoofdmap. Dit doen we met het volgende commando: "npm init".
+
+\section{TestCafé}
+
+\subsection{Installatie en configuratie}
+De installatie van TestCafé zelf gebeurt met behulp van de package manager die Linux standaard voorziet met het commando: npm install --save-dev testcafe. Hiermee werd testcafe lokaal geïnstalleerd in de hoofdmap van de Drupal installatie. Dit commando zorgt er ook voor dat de afhankelijkheden van TestCafé aan de npm afhankelijkheden lijst worden toegevoegd. Met het commando: npm install -g testcafe, werd testcafe ook globaal geïnstalleerd. Zowel lokaal als globaal installeren van TestCafé maken het mogelijk om gebruik te maken van het commando "testcafe" om je testen uit te voeren.
+
+Vervolgens werd er in diezelfde map een tests folder aangemaakt die de test bevat. De test werd testcafe.js genoemd en is in het volgende deel, implementatie, te vinden.
+
+\subsection{Implementatie}
+Het uitvoeren van de test gebeurde in chrome met het commando: "testcafe "chrome" tests/testcafe.js".
+\lstinputlisting{testen/testcafe.js}
+
+\subsection{Uitvoeringstijd}
+
+
+\begin{center}
+\begin{tabular}{ |c| |c |c |c |c |c |c |c |c |c |c| }
+\hline
+	\# & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10\\
+\hline
+	tijd (s) & 23 & 11 & 11 & 11 & 11 & 12 & 11 & 11 & 11 & 11\\
+\hline
+ Gemiddelde & \multicolumn{10}{c|}{12,3 seconden}\\
+\hline
+\end{tabular}
+\end{center}
+
+\section{Cypress}
+
+\subsection{Installatie en configuratie}
+
+Als eerste moet er terug een package.json aangemaakt worden in de hoofdmap van de Drupal 8.5.6 installatie die Cypress.local werd genoemd. Dit gebeurt opnieuw met het commando npm init. Hierna wordt Cypress geïnstalleerd met het commando: "npm install cypress --save-dev". Vervolgens openen we de Cypress client met het commando: "npx cypress open". In de client zijn momenteel enkel voorbeeldtesten terug te vinden die bij de installatie werden meegeleverd. Hier wordt naast de example folder een tests folder aangemaakt met de test "cypress.spec.js".
+
+In de hoofdmap is er bij de installatie een cypress.json bestand aangemaakt. In dit bestand kan je de standaard configuratie overschrijven. Hier wordt de baseUrl toegevoegd om vast te leggen op welke site de testen moeten uitgevoerd worden: "baseUrl": "http://cypress.local/".
+
+\subsection{Implementatie}
+De test verloopt volgens de specificaties beschreven in het vorige deel en wordt met behulp van de UI gestart. In deze test werd error handling afgezet zodat de test niet zou stoppen wanneer er ergens in de JavaScript een error wordt tegen gekomen.
+\lstinputlisting{testen/cypress.spec.js}
+\subsection{Uitvoeringstijd}
+
+\begin{center}
+\begin{tabular}{ |c| |c |c |c |c |c |c |c |c |c |c| }
+\hline
+	\# & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10\\
+\hline
+	tijd (s) & 8,70 & 6,70 & 5,88 & 6,68 & 6,64 & 6,55 & 6,46 & 6,46 & 6,44 & 5,88\\
+\hline
+ Gemiddelde & \multicolumn{10}{c|}{6,64 seconden}\\
+\hline
+\end{tabular}
+\end{center}
+
+\section{Nightwatch}
+\subsection{Installatie en configuratie}
+Eerst installeren we Nightwatch lokaal door het volgende commando uit te voeren in de hoofdmap van het project dat hiervoor is aangemaakt: "npm install nightwatch". Vervolgens installeren we Nightwatch ook globaal met het commando: "npm install -g nightwatch". Hierdoor kunnen we gebruik maken van het nightwatch commando voor testen uit te voeren.
+
+De volgende stap is de installatie van de ChromeDriver met het commando: "npm install chromedriver". Hierna maken we in de hoofdmap het configuratie bestand nightwatch.json aan waarin gedefinieerd wordt dat de ChromeDriver standaard moet gebruikt worden. Het nightwatch.json bestand ziet er als volgt uit:
+\lstinputlisting{Configuratie_bestanden/nightwatch.json}
+
+Vervolgens wordt in het globals.js bestand gedefinieerd dat ChromeDriver automatisch moet opstarten bij het uitvoeren van testen met Nightwatch. Het globals.js bestand ziet er uit als volgt: 
+\begin{lstlisting}
+var chromedriver = require('chromedriver');
+module.exports = {
+  before : function(done) {
+    chromedriver.start();
+
+    done();
+  },
+
+  after : function(done) {
+    chromedriver.stop();
+
+    done();
+  }
+};  
+\end{lstlisting}
+
+\subsection{Implementatie}
+De test verloopt volgens de specificaties beschreven in het vorige deel en wordt met het volgend commando gestart: "nightwatch nightwatch/tests/nightwatch.js".
+\lstinputlisting{testen/nightwatch.js}
+\subsection{Uitvoeringstijd}
+
+\begin{center}
+\begin{tabular}{ |c| |c |c |c |c |c |c |c |c |c |c| }
+\hline
+	\# & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10\\
+\hline
+	tijd (s) & 5,44 & 5,51 & 5,41 & 5,41 & 5,58 & 5,71 & 5,41 & 5,39 & 5,66 & 5,51\\
+\hline
+ Gemiddelde & \multicolumn{10}{c|}{5,50 seconden}\\
+\hline
+\end{tabular}
+\end{center}
+
+\section{WebdriverIO}
+\subsection{Installatie en configuratie}
+We beginnen de installatie met WebdriverIO lokaal en globaal te installeren met de commando's: "npm install webdriverio" en "npm install -g webdriverio". Hierdoor kunnen we testen uitvoeren met het wdio commando. Hierna wordt ChromeDriver geïnstalleerd met "npm install chromedriver". Normaal gezien zou de volgende stap zijn om gebruik te maken van de Selenium Standalone Service om de ChromeDriver te kunnen aanspreken, maar deze stap kunnen we vervangen door WDIO ChromeDriver Service te installeren met het commando "npm install wdio-chromedriver-service". In de hoofdmap maken we een map webdriverio aan met daarin een map tests die de test zal bevatten. Voor de logs van Chromedriver in op te slaan werd ook een folder aangemaakt. Om asserties te maken in de test maken we gebruik van de assertie library Chai, dit installeren we met het commando "npm install chai". Om die library samen met WebdriverIO te gebruiken moeten we ook de module chai-webdriverio installeren met "npm install chai-webdriverio".
+
+Nu wordt de configuratie van WebDriverIO van uit de command line gestart met "wdio config". De volgende opties worden geselecteerd:
+\begin{itemize}
+\item Waar moeten de testen uitgevoerd worden? Op mijn lokale machine
+\item Welk testing framework wil je gebruiken? Mocha
+\item Zal ik het framework voor jou installeren? Ja
+\item Waar kunnen de testen terug gevonden worden? ./webdriverio/tests/*.js
+\item Welke reporter mag gebruikt worden? Dot reporter (standaard)
+\item Welke service wil je gebruiken voor het uitvoeren van testen? ChromeDriver
+\item Hoeveel moet gelogd worden? Stil (standaard)
+\item Waar moeten de snapshots van de errors opgeslagen worden? ./webdriverio/errorShots/
+\item Wat is de base url? http://webdriverio.local
+\end{itemize}
+Dit zorgt er voor dat een basis configuratie bestand wdio.conf.js wordt aangemaakt. Dit bestand wordt nog aangepast om de ChromeDriver op de standaard 9515 poort te vinden. Het bestand ziet er uit als volgt: 
+
+\lstinputlisting{Configuratie_bestanden/wdio.conf.js}
+
+\subsection{Implementatie}
+De test verloopt volgens het scenario beschreven in het vorige deel. Voor het uitvoeren van de test moet eerst de ChromeDriver service opgestart worden met het commando "./node\_modules/.bin/chromedriver". Eens de ChromeDriver opgestart is kan met het commando "wdio wdio.conf.js" de test uitgevoerd worden.
+
+\lstinputlisting{testen/nightwatch.js}
+
+\subsection{Uitvoeringstijd}
+
+\begin{center}
+\begin{tabular}{ |c| |c |c |c |c |c |c |c |c |c |c| }
+\hline
+	\# & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10\\
+\hline
+	tijd (s) & 6,7 & 6,8 & 6,5 & 7,0 & 6,7 & 6,5 & 6,7 & 6,7 & 6,1 & 6,7\\
+\hline
+ Gemiddelde & \multicolumn{10}{c|}{6,6 seconden}\\
+\hline
+\end{tabular}
+\end{center}
+
+\section{Nightmare}
+\subsection{Installatie en configuratie}
+De installatie van Nightmare start net zoals de andere tools met een NPM commando, "npm install nightmare". Bij de installatie van Nightmare wordt ook al Electron meegeleverd dus we moeten dit niet zelf nog eens installeren. Hierna installeren we het testing framework Mocha met "npm install mocha" en de assertie library Chai met "npm install chai". Het package.json bestand wordt ook aangepast om het uitvoeren van de testen met npm mogelijk te maken en ziet er uit als volgt:
+\lstinputlisting{Configuratie_bestanden/package.json}
+De laatste stap van de installatie is om een map met de naam "test" aan te maken. Deze map zal dan de test bevatten die uitgevoerd wordt.
+\subsection{Implementatie}
+Het uitvoeren van de test gebeurt met het commando "npm test" en de test is opgebouwd volgens het testscenario.
+\lstinputlisting{testen/nightmare.js}
+\subsection{Uitvoeringstijd}
+
+\begin{center}
+\begin{tabular}{ |c| |c |c |c |c |c |c |c |c |c |c| }
+\hline
+	\# & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10\\
+\hline
+	tijd (s) & 7,94 & 8,77 & 8,99 & 8,67 & 8,04 & 8,81 & 8,60 & 8,71 & 8,92 & 9,45\\
+\hline
+ Gemiddelde & \multicolumn{10}{c|}{9,37 seconden}\\
+\hline
+\end{tabular}
+\end{center}
+
+\section{Puppeteer}
+\subsection{Installatie en configuratie}
+De installatie van Nightmare start zoals gebruikelijk met een npm commando, "npm install puppeteer". Bij de installatie van Puppeteer wordt Chromium meegeleverd omdat dit de browser is die Puppeteer automatiseert. De volgende stap is om het testing framework Mocha te installeren met "npm install mocha" en de assertie library chai met "npm install chai". Hierna passen we het package.json bestand aan zodat we de testen kunnen uitvoeren met een npm commando. Het package.json bestand ziet er zo uit:
+\lstinputlisting{Configuratie_bestanden/puppeteer.json}
+De laatste stap is om een map aan te maken in de hoofdmap met de naam "test", waarin het test bestand zal komen.
+\subsection{Implementatie}
+Het uitvoeren van de test gebeurt met het commando "npm test" en de test is opgebouwd volgens het testscenario.
+\lstinputlisting{testen/puppeteer.js}
+\subsection{Uitvoeringstijd}
+
+\begin{center}
+\begin{tabular}{ |c| |c |c |c |c |c |c |c |c |c |c| }
+\hline
+	\# & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10\\
+\hline
+	tijd (s) & 5,09 & 4,93 & 5,67 & 5,14 & 4,96 & 5,34 & 4,71 & 5,00 & 5,25 & 5,18\\
+\hline
+ Gemiddelde & \multicolumn{10}{c|}{5,13 seconden}\\
+\hline
+\end{tabular}
+\end{center}
 %% TODO: Hoe ben je te werk gegaan? Verdeel je onderzoek in grote fasen, en
 %% licht in elke fase toe welke stappen je gevolgd hebt. Verantwoord waarom je
 %% op deze manier te werk gegaan bent. Je moet kunnen aantonen dat je de best

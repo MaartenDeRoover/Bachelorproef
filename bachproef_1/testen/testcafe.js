@@ -14,7 +14,6 @@ fixture `Simple test`
 
     .afterEach( async t => {
       await t.click(Selector('#block-bartik-account-menu ul li a').withText('Log out'))
-      .expect(Selector('#block-bartik-page-title').find('h1').innerText).contains('Welcome to TestCafe');
     });
 
 test('Creating a basic page and deleting that page', async t => {
