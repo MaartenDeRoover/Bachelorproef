@@ -63,7 +63,8 @@ LAMP-stack is de benaming voor een combinatie van softwarepakketten die dienen v
 \textcite{Git} is een gratis open source versiebeheersysteem. Aan de hand van Git kunnen bestanden en mappen gemakkelijk online in een Git repository bijgehouden en geüpdatet worden. De laatste stabiele versie van Git dat uitgekomen is, is 2.18.0 en dit is ook de versie die gebruikt wordt.
 
 \paragraph{Node.js \& Npm}
-\textcite{Node} is een open source runtime-omgeving die het mogelijk maakt om javascript code uit te voeren buiten de browser. De versie van Node.js die voor dit onderzoek gebruikt wordt is Node.js 10.8.0. Bij de installatie van Node.js wordt Npm meegeleverd. \textcite{Npm} staat voor Node Package Manager en is dus het programma waarmee Node.js modules kunnen worden gedownload. De versie van Npm die meegeleverd werd met Node.js 10.8.0 is 6.2.0. Node.js en Npm wordt in dit onderzoek meerdere keren gebruikt om verschillende \glspl{tool}, \glspl{framework} of \glspl{library} te downloaden en uit te voeren.
+\label{nodejs}
+\textcite{Node} is een open source runtime-omgeving die het mogelijk maakt om JavaScript code uit te voeren buiten de browser. De versie van Node.js die voor dit onderzoek gebruikt wordt is Node.js 10.8.0. Bij de installatie van Node.js wordt Npm meegeleverd. \textcite{Npm} staat voor Node Package Manager en is dus het programma waarmee Node.js modules kunnen worden gedownload. De versie van Npm die meegeleverd werd met Node.js 10.8.0 is 6.2.0. Node.js en Npm wordt in dit onderzoek meerdere keren gebruikt om verschillende \glspl{tool}, \glspl{framework} en \glspl{library} te downloaden en uit te voeren.
 
 \paragraph{Visual Studio Code}
 Visual Studio Code is de code-editor die in dit onderzoek gebruikt wordt om de testen te schrijven of om de configuratie bestanden aan te passen. Er werd gekozen voor Visual Studio Code omdat dit een veelzijdige lichte code-editor is die kan uitgebreid worden met plugins voor specifieke doeleinden.
@@ -73,12 +74,14 @@ Aangezien dit onderzoek uitgevoerd wordt in opdracht van Dropsolid, wordt dus ge
 
 Drupal is een gratis open source \gls{contentmanagementsysteem} geschreven in PHP dat zeer krachtig is en waarmee flexibele websites kunnen gebouwd worden die zeer schaalbaar zijn. Voor het bouwen van een website in Drupal is een redelijke portie technische kennis vereist, het onderhouden en toevoegen van inhoud vereist echter minder technische kennis en kan makkelijk door iemand gedaan worden die niet technisch is. Drupal is open source en heeft een grote community die actief modules en thema's toevoegen aan Drupal.org zodat deze door anderen kunnen gebruikt worden. Een Drupal module is een extensie die kan toegevoegd worden aan een Drupal website en die een bepaalde functionaliteit voorziet. Thema's zijn extensies die aan een site kunnen toegevoegd worden en die de look en feel van de site aanpassen.
 
-Momenteel zijn er 2 versies van Drupal in omloop die beiden nog onderhouden en ondersteund worden, Drupal 7 en Drupal 8. Drupal 7 kwam uit op 5 januari 2011 en is sinds dan uitgegroeid tot een volwaardig systeem met veel modules, veel documentatie en veel problemen die al opgelost werden door de community. Drupal 8 is nieuwer en werd gelanceerd op 19 november 2015. Hierdoor is er over Drupal 8 minder documentatie te vinden en zijn er momenteel nog minder modules ontwikkeld. Drupal 8 bevat nog steeds de kernideeën van Drupal maar is ontwikkeld met de gedachte om Drupal toegankelijker te maken voor zowel gebruikers als voor ontwikkelaars. Drupal 8 is beter in lijn met het web zoals Jonathan zei in zijn vergelijking tussen Drupal 7 en Drupal 8, \cite{Ramael2015}.
+\clearpage
+Momenteel zijn er 2 versies van Drupal in omloop die beiden nog onderhouden en ondersteund worden, Drupal 7 en Drupal 8. Drupal 7 kwam uit op 5 januari 2011 en is sinds dan uitgegroeid tot een volwaardig systeem met veel modules, veel documentatie en veel problemen die al opgelost werden door de community. Drupal 8 is nieuwer en werd gelanceerd op 19 november 2015. Hierdoor is er over Drupal 8 minder documentatie te vinden en zijn er momenteel nog minder modules ontwikkeld. Drupal 8 bevat nog steeds de kernideeën van Drupal maar is ontwikkeld met de gedachte om Drupal toegankelijker te maken voor zowel gebruikers als voor ontwikkelaars. Drupal 8 is beter in lijn met het web zoals \textcite{Ramael2015} zei in zijn vergelijking tussen Drupal 7 en Drupal 8.
 
-Voor dit onderzoek wordt gebruik gemaakt van de laatste versie van Drupal 8, namelijk Drupal 8.5.6. Het doel van dit onderzoek is om het voor Dropsolid mogelijk te maken om front-end testen te schrijven voor hun Drupal 8 installatieprofiel, genaamd Rocketship, dus het is logisch dat enkel Drupal 8 in aanmerking komt. Rocketship is door Dropsolid ontwikkeld en is een Drupal 8 installatieprofiel dat al modules, features en een basis thema bevat om het webontwikkelingsproces te versnellen.
+Voor dit onderzoek wordt gebruik gemaakt van de laatste versie van Drupal 8, namelijk Drupal 8.5.6. Het doel van dit onderzoek is om het voor Dropsolid mogelijk te maken om functionele testen te schrijven voor hun Drupal 8 installatieprofiel, genaamd Rocketship, dus het is logisch dat enkel Drupal 8 in aanmerking komt. Rocketship is door Dropsolid ontwikkeld en is een Drupal 8 installatieprofiel dat al modules, features en een basis thema bevat om het webontwikkelingsproces te versnellen.
 
 \clearpage
 \section{Testscenario}
+\label{testscenario}
 \subsection{Installatie en configuratie}
 In dit deel zal het installatieproces beschreven worden. Hier zullen ook de configuratie bestanden terechtkomen die aangemaakt werden voor de installatie van de \glspl{tool}.
 
@@ -89,7 +92,7 @@ De test is steeds op dezelfde manier opgebouwd en is geschreven met als doel het
 
 De test start met het inloggen als administrator op een Drupal 8.5.6 website die reeds vooraf geïnstalleerd werd. Vervolgens wordt er een nieuwe node aangemaakt van het type "basic page" met de titel "Een nieuwe node". Daarna wordt deze node verwijderd en ten slotte wordt er uigelogd. Tijdens deze test worden er vier \glspl{assertie} gemaakt om na te gaan of de test foutloos verlopen is. De eerste \gls{assertie} is direct bij het optarten van de site om te controleren of de correcte site is geopend en of deze correct geopend is door de titel van de pagina te controleren. De tweede \gls{assertie} controleert of er correct is ingelogd door na het inloggen te controleren of de huidige pagina de account overzichtspagina is. De derde \gls{assertie} gaat na of de node correct is aangemaakt door te controleren of de huidige pagina de node pagina is. De laatste \gls{assertie} controleert of er tijdens het verwijderen van de pagina een bevestigingspagina getoond wordt.
 \subsection{Uitvoeringstijd}
-In dit deel zal de uitvoeringstijd van het tien maal uitvoeren van de test en de gemiddelde tijd hiervoor worden weergegeven. De uitvoeringstijden worden gemeten met de ingebouwde reporters van de \glspl{tool}, hierdoor zijn de tijden niet altijd even precies. De uitvoeringstijden die in dit onderzoek gemeten worden, moeten niet als een benchmark gezien worden maar eerder als een proof of concept om ruim de verschillen in tijd te vergelijken.
+In dit deel zal de uitvoeringstijd van het tien maal uitvoeren van de test en de gemiddelde tijd hiervoor worden weergegeven. De uitvoeringstijden werden gemeten met de ingebouwde reporters van de \glspl{tool}, hierdoor zijn de tijden niet altijd even precies. De uitvoeringstijden die in dit onderzoek gemeten worden, moeten niet als een benchmark gezien worden maar eerder als een proof of concept om ruim de verschillen in tijd te vergelijken.
 
 \clearpage
 \section{Basisconfiguratie}
@@ -121,7 +124,7 @@ In het hosts bestand in de /etc/ folder werd volgende regel toegevoegd:
 
 Deze configuratie maakt het mogelijk om lokaal via de projectnaam naar de website te surfen.
 
-Verder wordt elke \gls{tool} geïnstalleerd via Npm en hiervoor moet eerst een package.json bestand aangemaakt worden in de hoofdmap. Dit gebeurt met het volgende commando: "npm init". Bij de Npm installatie worden ook de dependencies van de \gls{tool} geïnstalleerd.
+Verder wordt elke \gls{tool} geïnstalleerd via Npm en hiervoor moet eerst een package.json bestand aangemaakt worden in de hoofdmap. Dit gebeurt met het volgende commando: "npm init". Bij de Npm installatie worden ook de dependencies van de \glspl{tool} geïnstalleerd.
 
 \clearpage
 \section{TestCafé}
@@ -155,7 +158,7 @@ Het uitvoeren van de test gebeurt met het commando: "testcafe 'chrome' tests/tes
 \subsection{Installatie en configuratie}
 
 
-Cypress wordt geïnstalleerd met het commando: "npm install cypress". Vervolgens wordt de Cypress client geopend met het commando: "npx cypress open". In de client zijn momenteel enkel voorbeeldtesten terug te vinden die bij de installatie werden meegeleverd. Hier wordt naast de example folder een tests folder aangemaakt met de test "cypress.spec.js".
+Cypress wordt geïnstalleerd met het commando: "npm install cypress". Vervolgens wordt de Cypress client geopend met het commando: "npx cypress open". In de client zijn momenteel enkel voorbeeldtesten terug te vinden die bij de installatie werden meegeleverd. Hier wordt naast de examples folder een tests folder aangemaakt met de test "cypress.spec.js".
 
 In de hoofdmap is er bij de installatie een cypress.json bestand aangemaakt. In dit bestand kan de standaard configuratie overschreven worden. Hier wordt de volgende regel toegevoegd om vast te leggen op welke site de testen moeten uitgevoerd worden: 
 
@@ -164,6 +167,7 @@ In de hoofdmap is er bij de installatie een cypress.json bestand aangemaakt. In 
 \subsection{Implementatie}
 De test verloopt volgens de specificaties beschreven in het vorige deel en wordt met behulp van de \gls{UI} gestart. In deze test wordt error handling afgezet zodat de test niet zou stoppen wanneer er ergens in de JavaScript een error wordt tegengekomen.
 
+\clearpage
 \paragraph{cypress.spec.js}
 \codefragment{testen/cypress.spec.js}{cypress}
 \subsection{Uitvoeringstijd}
@@ -181,14 +185,13 @@ De test verloopt volgens de specificaties beschreven in het vorige deel en wordt
 \clearpage
 \section{Nightwatch}
 \subsection{Installatie en configuratie}
-Eerst wordt Nightwatch lokaal geïnstalleerd door het volgende commando uit te voeren in de hoofdmap van het project dat hiervoor is aangemaakt: "npm install nightwatch". Vervolgens wordt Nightwatch ook globaal geïnstalleerd met het commando: "npm install -g nightwatch". Hierdoor kan gebruik gemaakt worden van het Nightwatch commando voor testen uit te voeren.
+Eerst wordt Nightwatch lokaal geïnstalleerd door het volgende commando uit te voeren in de hoofdmap van het project dat hiervoor is aangemaakt: "npm install nightwatch". Vervolgens wordt Nightwatch ook globaal geïnstalleerd met het commando: "npm install -g nightwatch". Hierdoor kan gebruik gemaakt worden van het "nightwatch" commando voor testen uit te voeren.
 
-De volgende stap is de installatie van de ChromeDriver met het commando: "npm install chromedriver". Hierna wordt in de hoofdmap het configuratie bestand nightwatch.json aangemaakt waarin gedefinieerd wordt dat de ChromeDriver standaard moet gebruikt worden.
+De volgende stap is de installatie van de \hyperref[chromedriver]{ChromeDriver} met het commando: "npm install chromedriver". Hierna wordt in de hoofdmap het configuratie bestand nightwatch.json aangemaakt waarin gedefinieerd wordt dat de \hyperref[chromedriver]{ChromeDriver} standaard moet gebruikt worden. Ten slotte wordt in het globals.js bestand gedefinieerd dat \hyperref[chromedriver]{ChromeDriver} automatisch moet opstarten bij het uitvoeren van testen met Nightwatch. 
 
+\clearpage
 \paragraph{nightwatch.json}
 \lstinputlisting[breaklines=true]{Configuratie_bestanden/nightwatch.json}
-
-Vervolgens wordt in het globals.js bestand gedefinieerd dat ChromeDriver automatisch moet opstarten bij het uitvoeren van testen met Nightwatch. 
 
 \paragraph{globals.js}
 \begin{lstlisting}[breaklines=true]
@@ -209,6 +212,7 @@ module.exports = {
 };  
 \end{lstlisting}
 
+\clearpage
 \subsection{Implementatie}
 De test verloopt volgens de specificaties beschreven in het vorige deel en wordt met het commando "nightwatch nightwatch/tests/nightwatch.js" gestart.
 
@@ -231,28 +235,29 @@ De test verloopt volgens de specificaties beschreven in het vorige deel en wordt
 \clearpage
 \section{WebdriverIO}
 \subsection{Installatie en configuratie}
-De installatie begint met WebdriverIO lokaal en globaal te installeren met de commando's "npm install webdriverio" "npm install -g webdriverio". Hierdoor kunnen testen uitgevoerd worden met het wdio commando. Hierna wordt ChromeDriver geïnstalleerd met "npm install chromedriver". Normaal gezien zou de volgende stap zijn om gebruik te maken van de Selenium Standalone Service om de ChromeDriver te kunnen aanspreken, maar deze stap kan vervangen worden door wdio ChromeDriver Service te installeren met het commando "npm install wdio-chromedriver-service". In de hoofdmap wordt een map webdriverio aangemaakt met daarin een map tests die de test zal bevatten. Voor de logs van Chromedriver in op te slaan wordt ook een folder aangemaakt. Om \glspl{assertie} te maken in de test, wordt de \gls{assertie} \gls{library} Chai gebruikt. Dit wordt geïnstalleerd met het commando "npm install chai". Om die \gls{library} samen met WebdriverIO te gebruiken moet ook de module chai-webdriverio geïnstalleerd worden met "npm install chai-webdriverio".
+De installatie begint met WebdriverIO lokaal en globaal te installeren met de commando's "npm install webdriverio", "npm install -g webdriverio". Hierdoor kunnen testen uitgevoerd worden met het wdio commando. Hierna wordt \hyperref[chromedriver]{ChromeDriver} geïnstalleerd met "npm install chromedriver". Normaal gezien zou de volgende stap zijn om gebruik te maken van de Selenium Standalone Service om de \hyperref[chromedriver]{ChromeDriver} te kunnen aanspreken, maar deze stap kan vervangen worden door wdio ChromeDriver Service te installeren met het commando "npm install wdio-chromedriver-service". In de hoofdmap wordt een map webdriverio aangemaakt met daarin een map tests die de test zal bevatten. Voor de logs van Chromedriver in op te slaan wordt ook een folder aangemaakt. Om \glspl{assertie} te maken in de test, wordt de \gls{assertie} \gls{library} \hyperref[chai]{Chai} gebruikt. Dit wordt geïnstalleerd met het commando "npm install chai". Om die \gls{library} samen met WebdriverIO te gebruiken moet ook de module chai-webdriverio geïnstalleerd worden met "npm install chai-webdriverio".
 
-Nu wordt de configuratie van WebdriverIO van uit de command line gestart met "wdio config". De volgende opties worden geselecteerd:
+Nu wordt de configuratie van WebdriverIO vanuit de command line gestart met "wdio config". De volgende opties worden geselecteerd:
 \begin{itemize}
 \item Waar moeten de testen uitgevoerd worden? Op mijn lokale machine
-\item Welk test \gls{framework} moet er gebruikt worden? Mocha
+\item Welk test \gls{framework} moet er gebruikt worden? \hyperref[mocha]{Mocha}
 \item Moet het \gls{framework} automatisch geïnstalleerd worden? Ja
 \item Waar kunnen de testen teruggevonden worden? ./webdriverio/tests/*.js
 \item Welke reporter mag gebruikt worden? Dot reporter (standaard)
-\item Welke service moet er gebruikt worden voor het uitvoeren van testen? ChromeDriver
+\item Welke service moet er gebruikt worden voor het uitvoeren van testen? \hyperref[chromedriver]{ChromeDriver}
 \item Hoeveel moet gelogd worden? Stil (standaard)
 \item Waar moeten de \glspl{snapshot} van de errors opgeslagen worden? ./webdriverio/errorShots/
 \item Wat is de base url? http://webdriverio.local
 \end{itemize}
-Dit zorgt ervoor dat een basis configuratie bestand wdio.conf.js wordt aangemaakt. Dit bestand wordt nog aangepast om de ChromeDriver op de standaard 9515 poort te vinden.
+Dit zorgt ervoor dat een basis configuratie bestand wdio.conf.js wordt aangemaakt. Dit bestand wordt nog aangepast om de \hyperref[chromedriver]{ChromeDriver} op de standaard 9515 poort te vinden.
 
+\clearpage
 \paragraph{wdio.conf.js}
 \codefragment{Configuratie_bestanden/wdio.conf.js}{webdriverio}
 
 \subsection{Implementatie}
-De test verloopt volgens het scenario beschreven in het vorige deel. Voor het uitvoeren van de test moet eerst de ChromeDriver service opgestart worden met het commando "./node\_modules/.bin/chromedriver". Zodra de ChromeDriver opgestart is, kan met het commando "wdio wdio.conf.js" de test uitgevoerd worden.
-
+Voor het uitvoeren van de test moet eerst de \hyperref[chromedriver]{ChromeDriver} service opgestart worden met het commando "./node\_modules/.bin/chromedriver". Zodra de \hyperref[chromedriver]{ChromeDriver} opgestart is, kan met het commando "wdio wdio.conf.js" de test uitgevoerd worden.
+\clearpage
 \paragraph{webdriverio.js}
 \lstinputlisting[breaklines=true]{testen/webdriverio.js}
 
@@ -265,7 +270,7 @@ De test verloopt volgens het scenario beschreven in het vorige deel. Voor het ui
 \hline
 	tijd (s) & 6,7 & 6,8 & 6,5 & 7,0 & 6,7 & 6,5 & 6,7 & 6,7 & 6,1 & 6,7\\
 \hline
- Gemiddelde & \multicolumn{10}{c|}{6,6 seconden}\\
+ Gemiddelde & \multicolumn{10}{c|}{6,64 seconden}\\
 \hline
 \end{tabular}
 
@@ -273,14 +278,16 @@ De test verloopt volgens het scenario beschreven in het vorige deel. Voor het ui
 \clearpage
 \section{Nightmare}
 \subsection{Installatie en configuratie}
-De installatie van Nightmare start net zoals de andere \glspl{tool} met een Npm commando "npm install nightmare". Bij de installatie van Nightmare wordt ook al Electron meegeleverd dus dit moet niet zelf nog eens geïnstalleerd worden. Hierna wordt het test \gls{framework} Mocha geïnstalleerd met "npm install mocha", en de \gls{assertie} \gls{library} Chai met "npm install chai". Het package.json bestand wordt ook aangepast om het uitvoeren van de testen met npm mogelijk te maken.
+De installatie van Nightmare start net zoals de andere \glspl{tool} met een Npm commando "npm install nightmare". Bij de installatie van Nightmare wordt ook al \hyperref[electron]{Electron} meegeleverd dus dit moet niet zelf nog eens geïnstalleerd worden. Hierna wordt het test \gls{framework} \hyperref[mocha]{Mocha} geïnstalleerd met "npm install mocha", en de \gls{assertie} \gls{library} \hyperref[chai]{Chai} met "npm install chai". Het package.json bestand wordt ook aangepast om het uitvoeren van de testen met npm mogelijk te maken.
 
 \paragraph{package.json}
 \lstinputlisting[breaklines=true]{Configuratie_bestanden/package.json}
 De laatste stap van de installatie is om een map met de naam test aan te maken. Deze map zal dan de test bevatten die uitgevoerd wordt.
-\subsection{Implementatie}
-Het uitvoeren van de test gebeurt met het commando "npm test". De test is opgebouwd volgens het reeds beschreven testscenario.
 
+\subsection{Implementatie}
+Het uitvoeren van de test gebeurt met het commando "npm test".
+
+\clearpage
 \paragraph{nightmare.js}
 \codefragment{testen/nightmare.js}{nightmare}
 \subsection{Uitvoeringstijd}
@@ -298,19 +305,21 @@ Het uitvoeren van de test gebeurt met het commando "npm test". De test is opgebo
 \clearpage
 \section{Puppeteer}
 \subsection{Installatie en configuratie}
-De installatie van Puppeteer start terug met een Npm commando, "npm install puppeteer". Bij de installatie van Puppeteer wordt Chromium meegeleverd omdat dit de browser is die Puppeteer automatiseert. De volgende stap is om het test \gls{framework} Mocha te installeren met "npm install mocha". Vervolgens wordt de \gls{assertie} \gls{library} chai met "npm install chai" geïnstalleerd. Hierna wordt het package.json bestand aangepast zodat de testen kunnen uitgevoerd worden met een Npm commando.
+De installatie van Puppeteer start terug met een Npm commando, "npm install puppeteer". Bij de installatie van Puppeteer wordt Chromium meegeleverd omdat dit de browser is die Puppeteer automatiseert. De volgende stap is om het test \gls{framework} \hyperref[mocha]{Mocha} te installeren met "npm install mocha". Vervolgens wordt de \gls{assertie} \gls{library} \hyperref[chai]{Chai} met "npm install chai" geïnstalleerd. Hierna wordt het package.json bestand aangepast zodat de testen kunnen uitgevoerd worden met een Npm commando.
 
 \paragraph{package.json}
 \lstinputlisting[breaklines=true]{Configuratie_bestanden/puppeteer.json}
 
 De laatste stap is om een map aan te maken in de hoofdmap met de naam "test", waarin het test bestand zal komen.
 
+\clearpage
 \subsection{Implementatie}
-Het uitvoeren van de test gebeurt met het commando "npm test". De test is opgebouwd volgens het reeds beschreven testscenario.
+Het uitvoeren van de test gebeurt met het commando "npm test".
 
 \paragraph{puppeteer.js}
 \codefragment{testen/puppeteer.js}{puppeteer}
 
+\clearpage
 \subsection{Uitvoeringstijd}
 
 \begin{tabular}{ |c| |c |c |c |c |c |c |c |c |c |c| }

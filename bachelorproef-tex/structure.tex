@@ -651,13 +651,13 @@ drupalUserIsLoggedIn, tags:, this.assert.containsText, this.waitForElementVisibl
 
 \lstdefinelanguage{nightmare}{
   morekeywords={show:, describe},
-  morendkeywords={wait, type, nightmare.evaluate, document.querySelector, textContent, nightmare.click, chai.expect, to.have.string, textContent;},
+  morendkeywords={wait, type, goto, nightmare.evaluate, document.querySelector, textContent, nightmare.click, chai.expect, to.have.string, textContent;},
   morestring=[b]`,
 }
 
 \lstdefinelanguage{puppeteer}{
   morekeywords={let, page},
-  morendkeywords={chai.expect, browser.newPage, args:, headless:, puppeteer.launch, page.evaluate, page.click, page.waitFor, textContent, browser.close, width:, height:, page.goto, page.setViewport, timeout:, waitUntil:, document.querySelector, to.have.string, expect},
+  morendkeywords={chai.expect, textContent, browser.newPage, args:, headless:, puppeteer.launch, page.evaluate, page.click, page.waitFor, textContent, browser.close, width:, height:, page.goto, page.setViewport, timeout:, waitUntil:, document.querySelector, to.have.string, expect, page.type},
   morestring=[b]`,
 }
 

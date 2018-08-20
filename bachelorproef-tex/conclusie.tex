@@ -18,7 +18,7 @@ Hierna wordt de conclusie geformuleerd en wordt toegelicht welke \gls{tool} verk
 \clearpage
 \section{Vergelijking}
 \subsection{Populariteit}
-\begin{figure}
+\begin{figure}[h]
 \caption{Aantal wekelijkse downloads met Npm op een tijdspanne van 1 jaar, grafiek van \textcite{npmtrends}}
 \includegraphics[width=1\textwidth]{img/npm_trends.PNG}
 \end{figure}
@@ -34,7 +34,7 @@ Nightmare en Puppeteer zijn het minst goed leesbaar. Nightmare omdat de \glspl{a
 \subsection{Cross-browser en cloud service mogelijkheden}
 \begin{tabular}{ | l | p{12cm} | }
 \hline
- TestCafé & TestCafé ondersteund het testen op Google Chrome, Internet Explorer, Microsoft Edge, Mozilla Firefox, Safari en Android. Ook kan TestCafé gebruik maken van alle bekende cloud services voor cross-browser testen zoals SauceLabs, Browserstack en TestingBot.\\
+ TestCafé & TestCafé ondersteunt het testen op Google Chrome, Internet Explorer, Microsoft Edge, Mozilla Firefox, Safari en Android. Ook kan TestCafé gebruik maken van alle bekende cloud services voor cross-browser testen zoals SauceLabs, Browserstack en TestingBot.\\
 \hline
  Cypress & Cross-browser testen is momenteel niet mogelijk met Cypress, enkel Chrome varianten worden ondersteund. Er zijn wel plannen om in de toekomst meerdere browsers te ondersteunen, \textcite{Mann2017}. Momenteel is er ook nog geen integratie met cloud services mogelijk.\\
 \hline
@@ -53,11 +53,11 @@ Nightmare en Puppeteer zijn het minst goed leesbaar. Nightmare omdat de \glspl{a
 \hline
  TestCafé & Voorziet documentatie voor integratie in AppVeyor, CircleCI, Jenkins, TeamCity en Travis.\\
 \hline
- Cypress & Voorziet documentatie voor integratie in Jenkins, Travis, CircleCI, CodeShip.\\
+ Cypress & Voorziet documentatie voor integratie in Jenkins, Travis, CircleCI en CodeShip.\\
 \hline
  Nightwatch & Voorziet geen documentatie voor integratie in \gls{CI} systemen, wel zijn online voorbeelden te vinden over de integratie in de bekende \gls{CI} systemen zoals Jenkins en Travis. \\
 \hline
- WebdriverIO & Voorziet documentatie voor integratie in Jenkins en Docker.\\
+ WebdriverIO & Voorziet documentatie voor integratie in Jenkins.\\
 \hline
  Nightmare & Voorziet geen documentatie voor integratie in \gls{CI} systemen, wel zijn online voorbeelden te vinden over de integratie in de bekende \gls{CI} systemen.\\
 \hline
@@ -93,7 +93,7 @@ Deze tijden moeten niet gezien worden als een benchmark om de \glspl{tool} te ve
 \hline
  Nightwatch & Gemiddeld 5,5 seconden voor het uitvoeren van de test. \\
 \hline
- WebdriverIO & Gemiddeld 6,6 seconden voor het uitvoeren van de test.\\
+ WebdriverIO & Gemiddeld 6,64 seconden voor het uitvoeren van de test.\\
 \hline
  Nightmare & Gemiddeld 8,69 seconden voor het uitvoeren van de test.\\
 \hline
@@ -105,7 +105,7 @@ Deze tijden moeten niet gezien worden als een benchmark om de \glspl{tool} te ve
 \section{Conclusie}
 De \gls{tool} die uit dit onderzoek naar voor komt als beste voor een \gls{KMO} gespecialiseerd in Drupal is Nightwatch. Nightwatch haalde het tweede beste resultaat op de performantietest en kan testen parallel uitvoeren. Er zijn voldoende mogelijkheden voor integratie met cloud services en ook cross-browser testen is geen probleem. Momenteel is er zelfs een cloud service specifiek voor Nightwatch in ontwikkeling. Ook de integratie in \gls{CI} systemen is geen probleem.
 
-Nightwatch voorziet standaard de mogelijkheid om \gls{BDD} en unit testen te schrijven. Nightwatch heeft al een \gls{assertie} \gls{library} ingebouwd en er is ook de mogelijkheid om screenshots te nemen met een eenvoudig commando.
+Nightwatch voorziet standaard de mogelijkheid om \gls{BDD} en unit testen te schrijven en heeft al een \gls{assertie} \gls{library} ingebouwd. Er is ook de mogelijkheid om screenshots te nemen met een eenvoudig commando.
 
 De doorslaggevende factor was echter het feit dat de Drupal community naar deze \gls{tool} toegroeit voor het maken van hun functionele testen. Zo is Nightwatch opgenomen in de core van de voorlopige versie van Drupal 8.6. Er zijn al enkele commando's met Nightwatch ontwikkeld voor bijvoorbeeld het inloggen of uitloggen op een Drupal site te automatiseren.
 
