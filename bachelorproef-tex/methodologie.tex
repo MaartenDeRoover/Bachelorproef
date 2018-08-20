@@ -1,0 +1,331 @@
+%%=============================================================================
+%% Methodologie
+%%=============================================================================
+
+\chapter{Methodologie}
+\label{ch:methodologie}
+In dit hoofdstuk wordt eerst de werkomgeving besproken. Daarna wordt het testscenario toegelicht, hierin staat hoe de \glspl{tool} getest zijn. Vervolgens wordt de basis configuratie besproken die voor het testen van elke \gls{tool} hetzelfde is. Hierna wordt elke verschillende \gls{tool} getest.
+
+\clearpage
+\section{Werkomgeving}
+In dit deel wordt de werkomgeving waarvan voor dit onderzoek gebruik is gemaakt toegelicht. De verschillende programma's en de reden waarom deze verkozen werden worden individueel toegelicht. In dit onderzoek wordt telkens, indien dit mogelijk was, gebruik gemaakt van de laatste stabiele versie die beschikbaar was om dit onderzoek zo actueel mogelijk te maken. Deze programma's werden voornamelijk geïnstalleerd met de package manager van de Linux versie die wordt gebruikt maar er wordt wel vermeld waar deze programma's te verkrijgen zijn.
+
+\subsection{Virtuele machine}
+Dit onderzoek maakt gebruik van de laatste versie van VirtualBox die momenteel beschikbaar is, VirtualBox 5.2.16 \textcite{VirtualBox}. VirtualBox is een programma waarmee andere besturingssystemen kunnen gedraaid worden binnen het huidige besturingssysteem. VirtualBox wordt gebruikt om een omgeving op te zetten die enkel dient voor dit onderzoek en dus niet beïnvloed wordt door externe factoren, zoals het downloaden van programma's voor andere doeleinden. Deze omgeving bevat enkel het nodige voor dit onderzoek en niet meer. 
+
+In VirtualBox werd er een linux virtuele machine opgezet. Er wordt gebruik gemaakt van Linux Mint 19 64-bit Cinnamon editie omdat dit besturingssysteem door Dropsolid wordt aangeraden. Linux Mint is een gratis en open source besturingssysteem dat gebaseerd is op Debian en Ubuntu en al 30000 packages voorziet, \textcite{LinuxMint}.
+\newglossaryentry{HTTP}{
+	type=\acronymtype,
+    name={HTTP},
+    description={HyperText Transfer Protocol}
+}
+\newglossaryentry{RAM}{
+	type=\acronymtype,
+    name={RAM},
+    description={Random Access Memory}
+}
+\newglossaryentry{TCP}{
+	type=\acronymtype,
+    name={TCP},
+    description={Transmission Control Protocol}
+}
+
+De specificaties van de virtuele machine zijn de volgende:
+\begin{itemize}
+\item 8192MB \gls{RAM} geheugen.
+\item Een virtuele harde schijf met een vaste grootte van 50GB. Er wordt gebruik gemaakt van een vaste grootte en niet van een virtuele harde schijf die dynamisch vergroot omdat die laatste de performantie van zowel het huidig besturingssysteem als dat van de virtuele machine kan aantasten, \textcite{Sanders2006}.
+\item 128MB video geheugen.
+\item 4 \glspl{CPU}
+\item In de netwerkinstellingen werden 2 poortdoorverwijzingen ingesteld. De eerste voor \gls{HTTP} met als protocol \gls{TCP} en van hostpoort 80 naar gastpoort 80. De tweede voor MariaDB met terug \gls{TCP} als protocol en van hostpoort 3306 naar gastpoort 3306.
+\end{itemize}
+
+\subsection{LAMP-stack}
+
+LAMP-stack is de benaming voor een combinatie van softwarepakketten die dienen voor het draaien van websites. De LAMP-stack die voor dit onderzoek werd opgezet bestaat uit Linux Mint, Apache2, MariaDB en PHP 7.1. De Linux Mint versie werd reeds besproken in het vorige deel, de overige worden in dit deel toegelicht.
+
+\paragraph{Apache}
+\textcite{Apache} is een gratis \gls{web server} en de laatste stabiele versie die is uitgekomen is 2.4.34. Voor dit onderzoek wordt gebruik gemaakt van deze laatste stabiele versie van Apache en niet van NGINX of IIS omdat Apache gedeelde hosting mogelijk maakt met .htaccess bestanden. Apache heeft momenteel met 46\% ook het grootste marktaandeel, \autocite{Leslie2018}.
+
+\paragraph{MariaDB}
+\textcite{MariaDB} is een relationeel databasemanagementsysteem. Een relationeel databasemanagementsysteem is een programma waarmee een relationele database gecreëerd, geüpdatet en beheerd kan worden. Een database is een set van data dat op een computer wordt opgeslagen en relationeel wijst er op dat er een structuur in zit die werkt aan de hand van relaties tussen de verschillende stukken data, \autocite{RDBMS}. Voor dit onderzoek wordt de laatste stabiele versie van MariaDB gebruikt, MariaDB 10.3.8. De keuze ging uit naar MariaDB en niet naar MySQL om 2 redenen. De eerste reden is dat MariaDB performanter is dan MySQL dit blijkt zowel uit het onderzoek van Lindstrom in 2014, \autocite{Lindstrom2014}, als uit het recentere onderzoek in 2017 van Taranto, \autocite{Taranto2017}. De tweede reden is dat Drupal websites beter met MariaDB samenwerken dan met MySQL.
+
+\paragraph{PHP}
+\textcite{PHP}, Hypertext preprocessor, is een scripting taal die specifiek voor web development ontwikkeld is. Aangezien PHP de programmeertaal is van Drupal is Php dus zeker een vereiste. De laatste stabiele versie van PHP is PHP 7.2.8 en deze versie wordt vanaf Drupal 8.5.0 ondersteund. De laatste stabiele versie van Drupal die uitgekomen is en die in dit onderzoek gebruikt wordt, is 8.5.6. Meer hierover in het gedeelte over Drupal.
+
+\subsection{Extra tools}
+\paragraph{PhpMyAdmin}
+\textcite{PhpMyAdmin} is een handige \gls{tool} om een database te beheren vanuit een webinterface. De versie die gebruikt wordt is opnieuw de laatste stabiele versie en voor phpmyadmin is dat momenteel 4.8.2.
+
+\paragraph{Drush}
+\textcite{Drush} is een hulpprogramma om Drupal vanuit de command line te bedienen. Drush bevat handige commando's om bijvoorbeeld de cache van een site te legen vanuit de command line. Aangezien dit allemaal vanuit de command line gebeurt is dit dus sneller dan via de webinterface. De versie van Drush die in dit onderzoek gebruikt wordt is 8.1.17.
+
+\paragraph{Git}
+\textcite{Git} is een gratis open source versiebeheersysteem. Aan de hand van Git kunnen bestanden en mappen gemakkelijk online in een Git repository bijgehouden en geüpdatet worden. De laatste stabiele versie van Git dat uitgekomen is, is 2.18.0 en dit is ook de versie die gebruikt wordt.
+
+\paragraph{Node.js \& Npm}
+\textcite{Node} is een open source runtime-omgeving die het mogelijk maakt om javascript code uit te voeren buiten de browser. De versie van Node.js die voor dit onderzoek gebruikt wordt is Node.js 10.8.0. Bij de installatie van Node.js wordt Npm meegeleverd. \textcite{Npm} staat voor Node Package Manager en is dus het programma waarmee Node.js modules kunnen worden gedownload. De versie van Npm die meegeleverd werd met Node.js 10.8.0 is 6.2.0. Node.js en Npm wordt in dit onderzoek meerdere keren gebruikt om verschillende \glspl{tool}, \glspl{framework} of \glspl{library} te downloaden en uit te voeren.
+
+\paragraph{Visual Studio Code}
+Visual Studio Code is de code-editor die in dit onderzoek gebruikt wordt om de testen te schrijven of om de configuratie bestanden aan te passen. Er werd gekozen voor Visual Studio Code omdat dit een veelzijdige lichte code-editor is die kan uitgebreid worden met plugins voor specifieke doeleinden.
+
+\subsection{Drupal}
+Aangezien dit onderzoek uitgevoerd wordt in opdracht van Dropsolid, wordt dus gebruik gemaakt van het \gls{contentmanagementsysteem} waarin zij gespecialiseerd zijn, namelijk \textcite{Drupal}.
+
+Drupal is een gratis open source \gls{contentmanagementsysteem} geschreven in PHP dat zeer krachtig is en waarmee flexibele websites kunnen gebouwd worden die zeer schaalbaar zijn. Voor het bouwen van een website in Drupal is een redelijke portie technische kennis vereist, het onderhouden en toevoegen van inhoud vereist echter minder technische kennis en kan makkelijk door iemand gedaan worden die niet technisch is. Drupal is open source en heeft een grote community die actief modules en thema's toevoegen aan Drupal.org zodat deze door anderen kunnen gebruikt worden. Een Drupal module is een extensie die kan toegevoegd worden aan een Drupal website en die een bepaalde functionaliteit voorziet. Thema's zijn extensies die aan een site kunnen toegevoegd worden en die de look en feel van de site aanpassen.
+
+Momenteel zijn er 2 versies van Drupal in omloop die beiden nog onderhouden en ondersteund worden, Drupal 7 en Drupal 8. Drupal 7 kwam uit op 5 januari 2011 en is sinds dan uitgegroeid tot een volwaardig systeem met veel modules, veel documentatie en veel problemen die al opgelost werden door de community. Drupal 8 is nieuwer en werd gelanceerd op 19 november 2015. Hierdoor is er over Drupal 8 minder documentatie te vinden en zijn er momenteel nog minder modules ontwikkeld. Drupal 8 bevat nog steeds de kernideeën van Drupal maar is ontwikkeld met de gedachte om Drupal toegankelijker te maken voor zowel gebruikers als voor ontwikkelaars. Drupal 8 is beter in lijn met het web zoals Jonathan zei in zijn vergelijking tussen Drupal 7 en Drupal 8, \cite{Ramael2015}.
+
+Voor dit onderzoek wordt gebruik gemaakt van de laatste versie van Drupal 8, namelijk Drupal 8.5.6. Het doel van dit onderzoek is om het voor Dropsolid mogelijk te maken om front-end testen te schrijven voor hun Drupal 8 installatieprofiel, genaamd Rocketship, dus het is logisch dat enkel Drupal 8 in aanmerking komt. Rocketship is door Dropsolid ontwikkeld en is een Drupal 8 installatieprofiel dat al modules, features en een basis thema bevat om het webontwikkelingsproces te versnellen.
+
+\clearpage
+\section{Testscenario}
+\subsection{Installatie en configuratie}
+In dit deel zal het installatieproces beschreven worden. Hier zullen ook de configuratie bestanden terechtkomen die aangemaakt werden voor de installatie van de \glspl{tool}.
+
+\subsection{Implementatie}
+In dit onderdeel zal de test, die met de \gls{tool} geschreven werd, komen en hier zal ook het commando voor het uitvoeren van de test te vinden zijn.
+
+De test is steeds op dezelfde manier opgebouwd en is geschreven met als doel het proces dat een normale gebruiker zou doorlopen zo goed mogelijk na te bootsen. Dit gebeurt door gebruik te maken van de menu's om te navigeren en van de buttons om bijvoorbeeld in te loggen. Er zal geen gebruik gemaakt worden van kortere wegen om het testen te versnellen.
+
+De test start met het inloggen als administrator op een Drupal 8.5.6 website die reeds vooraf geïnstalleerd werd. Vervolgens wordt er een nieuwe node aangemaakt van het type "basic page" met de titel "Een nieuwe node". Daarna wordt deze node verwijderd en ten slotte wordt er uigelogd. Tijdens deze test worden er vier \glspl{assertie} gemaakt om na te gaan of de test foutloos verlopen is. De eerste \gls{assertie} is direct bij het optarten van de site om te controleren of de correcte site is geopend en of deze correct geopend is door de titel van de pagina te controleren. De tweede \gls{assertie} controleert of er correct is ingelogd door na het inloggen te controleren of de huidige pagina de account overzichtspagina is. De derde \gls{assertie} gaat na of de node correct is aangemaakt door te controleren of de huidige pagina de node pagina is. De laatste \gls{assertie} controleert of er tijdens het verwijderen van de pagina een bevestigingspagina getoond wordt.
+\subsection{Uitvoeringstijd}
+In dit deel zal de uitvoeringstijd van het tien maal uitvoeren van de test en de gemiddelde tijd hiervoor worden weergegeven. De uitvoeringstijden worden gemeten met de ingebouwde reporters van de \glspl{tool}, hierdoor zijn de tijden niet altijd even precies. De uitvoeringstijden die in dit onderzoek gemeten worden, moeten niet als een benchmark gezien worden maar eerder als een proof of concept om ruim de verschillen in tijd te vergelijken.
+
+\clearpage
+\section{Basisconfiguratie}
+Voor het surfen naar de website te vereenvoudigen werd een apache2 configuratie bestand aangemaakt voor elk project dat in de folders /etc/apache2/sites-available en /etc/apache2/sites-enabled terechtkomt.
+
+\paragraph{PROJECT\_NAAM.conf}
+\begin{lstlisting}[breaklines=true]
+<VirtualHost *:80>
+  ServerName PROJECT_NAAM
+  ServerAlias *.PROJECT_NAAM
+  
+  DocumentRoot /websites/PROJECT_NAAM
+  
+  <Directory /websites/PROJECT_NAAM>
+     Options Indexes FollowSymLinks MultiViews
+     AllowOverride All
+     Require all granted
+  </Directory>
+  
+   ErrorLog /var/log/apache2/PROJECT_NAAM_error.log
+   LogLevel error
+   CustomLog /var/log/apache2/PROJECT_NAAM_access.log combined
+</VirtualHost>
+\end{lstlisting}
+
+In het hosts bestand in de /etc/ folder werd volgende regel toegevoegd: 
+
+127.0.0.1   PROJECT\_NAAM .
+
+Deze configuratie maakt het mogelijk om lokaal via de projectnaam naar de website te surfen.
+
+Verder wordt elke \gls{tool} geïnstalleerd via Npm en hiervoor moet eerst een package.json bestand aangemaakt worden in de hoofdmap. Dit gebeurt met het volgende commando: "npm init". Bij de Npm installatie worden ook de dependencies van de \gls{tool} geïnstalleerd.
+
+\clearpage
+\section{TestCafé}
+
+\subsection{Installatie en configuratie}
+De installatie van TestCafé gebeurt met het commando: "npm install testcafe". Hiermee wordt testcafe lokaal geïnstalleerd in de hoofdmap van de Drupal installatie. Met het commando: npm install -g testcafe, wordt testcafe ook globaal geïnstalleerd. Zowel lokaal als globaal installeren van TestCafé maakt het mogelijk om gebruik te maken van het commando "testcafe" voor het uitvoeren van de test.
+
+Vervolgens wordt in dezelfde map een tests folder aangemaakt die de test bevat. De test wordt "testcafe.js" genoemd en is in het volgende deel, implementatie, te vinden.
+
+\subsection{Implementatie}
+Het uitvoeren van de test gebeurt met het commando: "testcafe 'chrome' tests/testcafe.js". Dit voert de test op Chrome uit.
+
+\paragraph{testcafe.js}
+\codefragment{testen/testcafe.js}{testcafe}
+
+\subsection{Uitvoeringstijd}
+
+\begin{tabular}{ |c| |c |c |c |c |c |c |c |c |c |c| }
+\hline
+	\# & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10\\
+\hline
+	tijd (s) & 23 & 11 & 11 & 11 & 11 & 12 & 11 & 11 & 11 & 11\\
+\hline
+ Gemiddelde & \multicolumn{10}{c|}{12,3 seconden}\\
+\hline
+\end{tabular}
+
+\clearpage
+\section{Cypress}
+
+\subsection{Installatie en configuratie}
+
+
+Cypress wordt geïnstalleerd met het commando: "npm install cypress". Vervolgens wordt de Cypress client geopend met het commando: "npx cypress open". In de client zijn momenteel enkel voorbeeldtesten terug te vinden die bij de installatie werden meegeleverd. Hier wordt naast de example folder een tests folder aangemaakt met de test "cypress.spec.js".
+
+In de hoofdmap is er bij de installatie een cypress.json bestand aangemaakt. In dit bestand kan de standaard configuratie overschreven worden. Hier wordt de volgende regel toegevoegd om vast te leggen op welke site de testen moeten uitgevoerd worden: 
+
+"baseUrl": "http://cypress.local/".
+
+\subsection{Implementatie}
+De test verloopt volgens de specificaties beschreven in het vorige deel en wordt met behulp van de \gls{UI} gestart. In deze test wordt error handling afgezet zodat de test niet zou stoppen wanneer er ergens in de JavaScript een error wordt tegengekomen.
+
+\paragraph{cypress.spec.js}
+\codefragment{testen/cypress.spec.js}{cypress}
+\subsection{Uitvoeringstijd}
+
+\begin{tabular}{ |c| |c |c |c |c |c |c |c |c |c |c| }
+\hline
+	\# & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10\\
+\hline
+	tijd (s) & 8,70 & 6,70 & 5,88 & 6,68 & 6,64 & 6,55 & 6,46 & 6,46 & 6,44 & 5,88\\
+\hline
+ Gemiddelde & \multicolumn{10}{c|}{6,64 seconden}\\
+\hline
+\end{tabular}
+
+\clearpage
+\section{Nightwatch}
+\subsection{Installatie en configuratie}
+Eerst wordt Nightwatch lokaal geïnstalleerd door het volgende commando uit te voeren in de hoofdmap van het project dat hiervoor is aangemaakt: "npm install nightwatch". Vervolgens wordt Nightwatch ook globaal geïnstalleerd met het commando: "npm install -g nightwatch". Hierdoor kan gebruik gemaakt worden van het Nightwatch commando voor testen uit te voeren.
+
+De volgende stap is de installatie van de ChromeDriver met het commando: "npm install chromedriver". Hierna wordt in de hoofdmap het configuratie bestand nightwatch.json aangemaakt waarin gedefinieerd wordt dat de ChromeDriver standaard moet gebruikt worden.
+
+\paragraph{nightwatch.json}
+\lstinputlisting[breaklines=true]{Configuratie_bestanden/nightwatch.json}
+
+Vervolgens wordt in het globals.js bestand gedefinieerd dat ChromeDriver automatisch moet opstarten bij het uitvoeren van testen met Nightwatch. 
+
+\paragraph{globals.js}
+\begin{lstlisting}[breaklines=true]
+var chromedriver = require('chromedriver');
+
+module.exports = {
+  before: function (done) {
+    chromedriver.start();
+
+    done();
+  },
+
+  after: function (done) {
+    chromedriver.stop();
+
+    done();
+  }
+};  
+\end{lstlisting}
+
+\subsection{Implementatie}
+De test verloopt volgens de specificaties beschreven in het vorige deel en wordt met het commando "nightwatch nightwatch/tests/nightwatch.js" gestart.
+
+\paragraph{nightwatch.js}
+\codefragment{testen/nightwatch.js}{}
+\subsection{Uitvoeringstijd}
+
+
+\begin{tabular}{ |c| |c |c |c |c |c |c |c |c |c |c| }
+\hline
+	\# & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10\\
+\hline
+	tijd (s) & 5,44 & 5,51 & 5,41 & 5,41 & 5,58 & 5,71 & 5,41 & 5,39 & 5,66 & 5,51\\
+\hline
+ Gemiddelde & \multicolumn{10}{c|}{5,50 seconden}\\
+\hline
+\end{tabular}
+
+
+\clearpage
+\section{WebdriverIO}
+\subsection{Installatie en configuratie}
+De installatie begint met WebdriverIO lokaal en globaal te installeren met de commando's "npm install webdriverio" "npm install -g webdriverio". Hierdoor kunnen testen uitgevoerd worden met het wdio commando. Hierna wordt ChromeDriver geïnstalleerd met "npm install chromedriver". Normaal gezien zou de volgende stap zijn om gebruik te maken van de Selenium Standalone Service om de ChromeDriver te kunnen aanspreken, maar deze stap kan vervangen worden door wdio ChromeDriver Service te installeren met het commando "npm install wdio-chromedriver-service". In de hoofdmap wordt een map webdriverio aangemaakt met daarin een map tests die de test zal bevatten. Voor de logs van Chromedriver in op te slaan wordt ook een folder aangemaakt. Om \glspl{assertie} te maken in de test, wordt de \gls{assertie} \gls{library} Chai gebruikt. Dit wordt geïnstalleerd met het commando "npm install chai". Om die \gls{library} samen met WebdriverIO te gebruiken moet ook de module chai-webdriverio geïnstalleerd worden met "npm install chai-webdriverio".
+
+Nu wordt de configuratie van WebdriverIO van uit de command line gestart met "wdio config". De volgende opties worden geselecteerd:
+\begin{itemize}
+\item Waar moeten de testen uitgevoerd worden? Op mijn lokale machine
+\item Welk test \gls{framework} moet er gebruikt worden? Mocha
+\item Moet het \gls{framework} automatisch geïnstalleerd worden? Ja
+\item Waar kunnen de testen teruggevonden worden? ./webdriverio/tests/*.js
+\item Welke reporter mag gebruikt worden? Dot reporter (standaard)
+\item Welke service moet er gebruikt worden voor het uitvoeren van testen? ChromeDriver
+\item Hoeveel moet gelogd worden? Stil (standaard)
+\item Waar moeten de \glspl{snapshot} van de errors opgeslagen worden? ./webdriverio/errorShots/
+\item Wat is de base url? http://webdriverio.local
+\end{itemize}
+Dit zorgt ervoor dat een basis configuratie bestand wdio.conf.js wordt aangemaakt. Dit bestand wordt nog aangepast om de ChromeDriver op de standaard 9515 poort te vinden.
+
+\paragraph{wdio.conf.js}
+\codefragment{Configuratie_bestanden/wdio.conf.js}{webdriverio}
+
+\subsection{Implementatie}
+De test verloopt volgens het scenario beschreven in het vorige deel. Voor het uitvoeren van de test moet eerst de ChromeDriver service opgestart worden met het commando "./node\_modules/.bin/chromedriver". Zodra de ChromeDriver opgestart is, kan met het commando "wdio wdio.conf.js" de test uitgevoerd worden.
+
+\paragraph{webdriverio.js}
+\lstinputlisting[breaklines=true]{testen/webdriverio.js}
+
+\subsection{Uitvoeringstijd}
+
+
+\begin{tabular}{ |c| |c |c |c |c |c |c |c |c |c |c| }
+\hline
+	\# & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10\\
+\hline
+	tijd (s) & 6,7 & 6,8 & 6,5 & 7,0 & 6,7 & 6,5 & 6,7 & 6,7 & 6,1 & 6,7\\
+\hline
+ Gemiddelde & \multicolumn{10}{c|}{6,6 seconden}\\
+\hline
+\end{tabular}
+
+
+\clearpage
+\section{Nightmare}
+\subsection{Installatie en configuratie}
+De installatie van Nightmare start net zoals de andere \glspl{tool} met een Npm commando "npm install nightmare". Bij de installatie van Nightmare wordt ook al Electron meegeleverd dus dit moet niet zelf nog eens geïnstalleerd worden. Hierna wordt het test \gls{framework} Mocha geïnstalleerd met "npm install mocha", en de \gls{assertie} \gls{library} Chai met "npm install chai". Het package.json bestand wordt ook aangepast om het uitvoeren van de testen met npm mogelijk te maken.
+
+\paragraph{package.json}
+\lstinputlisting[breaklines=true]{Configuratie_bestanden/package.json}
+De laatste stap van de installatie is om een map met de naam test aan te maken. Deze map zal dan de test bevatten die uitgevoerd wordt.
+\subsection{Implementatie}
+Het uitvoeren van de test gebeurt met het commando "npm test". De test is opgebouwd volgens het reeds beschreven testscenario.
+
+\paragraph{nightmare.js}
+\codefragment{testen/nightmare.js}{nightmare}
+\subsection{Uitvoeringstijd}
+
+\begin{tabular}{ |c| |c |c |c |c |c |c |c |c |c |c| }
+\hline
+	\# & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10\\
+\hline
+	tijd (s) & 7,94 & 8,77 & 8,99 & 8,67 & 8,04 & 8,81 & 8,60 & 8,71 & 8,92 & 9,45\\
+\hline
+ Gemiddelde & \multicolumn{10}{c|}{8,69 seconden}\\
+\hline
+\end{tabular}
+
+\clearpage
+\section{Puppeteer}
+\subsection{Installatie en configuratie}
+De installatie van Puppeteer start terug met een Npm commando, "npm install puppeteer". Bij de installatie van Puppeteer wordt Chromium meegeleverd omdat dit de browser is die Puppeteer automatiseert. De volgende stap is om het test \gls{framework} Mocha te installeren met "npm install mocha". Vervolgens wordt de \gls{assertie} \gls{library} chai met "npm install chai" geïnstalleerd. Hierna wordt het package.json bestand aangepast zodat de testen kunnen uitgevoerd worden met een Npm commando.
+
+\paragraph{package.json}
+\lstinputlisting[breaklines=true]{Configuratie_bestanden/puppeteer.json}
+
+De laatste stap is om een map aan te maken in de hoofdmap met de naam "test", waarin het test bestand zal komen.
+
+\subsection{Implementatie}
+Het uitvoeren van de test gebeurt met het commando "npm test". De test is opgebouwd volgens het reeds beschreven testscenario.
+
+\paragraph{puppeteer.js}
+\codefragment{testen/puppeteer.js}{puppeteer}
+
+\subsection{Uitvoeringstijd}
+
+\begin{tabular}{ |c| |c |c |c |c |c |c |c |c |c |c| }
+\hline
+	\# & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10\\
+\hline
+	tijd (s) & 5,09 & 4,93 & 5,67 & 5,14 & 4,96 & 5,34 & 4,71 & 5,00 & 5,25 & 5,18\\
+\hline
+ Gemiddelde & \multicolumn{10}{c|}{5,13 seconden}\\
+\hline
+\end{tabular}
+%% TODO: Hoe ben je te werk gegaan? Verdeel je onderzoek in grote fasen, en
+%% licht in elke fase toe welke stappen je gevolgd hebt. Verantwoord waarom je
+%% op deze manier te werk gegaan bent. Je moet kunnen aantonen dat je de best
+%% mogelijke manier toegepast hebt om een antwoord te vinden op de
+%% onderzoeksvraag.
+
+

@@ -1,0 +1,409 @@
+\chapter{Stand van zaken}
+\label{ch:stand-van-zaken}
+\newglossaryentry{BDD}{
+	type=\acronymtype,
+    name={BDD},
+    description={Behavior Driven Development},
+    first={Behavior Driven Development (BDD)\glsadd{BDDG}},
+    see=[Glossary:]{BDDG}
+}
+\newglossaryentry{BDDG}
+{
+    name={BDD},
+    description={Behavior Driven Development is een ontwikkelingswijze waarbij voor er geprogrammeerd wordt eerst het gedrag wordt beschreven}
+}
+In dit hoofstuk worden eerst de belangrijkste testtypes voor het testen van websites besproken. Dit zijn unit testen, integratie testen en functionele testen. 
+
+Dan worden de verschillende soorten \glspl{tool} van het functionele testtype toegelicht, namelijk de \glspl{tool} voor het schrijven van testen, de \glspl{tool} voor cross-browser testen en de \glspl{tool} voor \gls{BDD}.
+
+Vervolgens worden de \glspl{tool} voor het schrijven van functionele testen verder opgedeeld in categorieën en worden per categorie de belangrijkste \glspl{tool} en hun kenmerken voorgesteld.
+
+\clearpage
+\section{Belangrijkste testtypes voor webdevelopment}
+% Tip: Begin elk hoofdstuk met een paragraaf inleiding die beschrijft hoe
+% dit hoofdstuk past binnen het geheel van de bachelorproef. Geef in het
+% bijzonder aan wat de link is met het vorige en volgende hoofdstuk.
+
+% Pas na deze inleidende paragraaf komt de eerste sectiehoofding.
+Dit deel bespreekt de belangrijkste testtypes voor webdevelopment: unit testen, integratie testen en functionele testen. In het volgende deel wordt dieper ingegaan op het testtype dat het belangrijkst is voor dit onderzoek, het functionele testtype.
+
+\subsection{Unit testen}
+
+Unit testen zijn het soort testen die er voor zorgen dat elke individuele component van een applicatie werkt. Met een unit wordt een module, een functie of een specifiek stukje code van een applicatie bedoeld, \textcite{Elliott2016}.
+\newglossaryentry{dummy}
+{
+    name=Dummy,
+    text=dummy,
+    description={Een dummy is een object dat nooit echt gebruikt wordt. Dummies worden meestal gebruikt voor het opvullen van parameterlijsten, \textcite{Fowler2007}},
+    plural={dummies}
+}
+\newglossaryentry{fake}
+{
+    name=Fake,
+    text=fake,
+    description={Een fake is een object dat werkende implementaties heeft maar dat gebruik maakt van een kortere weg waardoor ze niet ideaal zijn voor productie, \textcite{Fowler2007}},
+    plural={fakes}
+}
+\newglossaryentry{stub}
+{
+    name=Stub,
+    text=stub,
+    description={Een stub wordt tijdens het testen gebruikt om een standaard antwoord te geven op een oproep, \textcite{Fowler2007}},
+    plural={stubs}
+}
+\newglossaryentry{spy}
+{
+    name=Spy,
+    text=spy,
+    description={Een spy is een \gls{stub} die informatie terug geeft over wanneer die spy werd opgeroepen, \textcite{Fowler2007}}
+    plural={spies}
+}
+\newglossaryentry{mock}
+{
+    name=Mock,
+    text=mock,
+    description={Een mock is een object dat voorgeprogrammeerd wordt met oproepen die ze verwachten te krijgen in gedachten, \textcite{Fowler2007}}
+    plural={mocks}
+}
+
+Een unit test zou simpel en snel moeten zijn en zou wanneer de test faalt duidelijk moeten zeggen waar de fout ligt en wat het probleem is. Om unit testen zo snel mogelijk te maken wordt er vaak gebruik gemaakt van \glspl{dummy}, \glspl{fake}, \glspl{stub}, \glspl{spy} en \glspl{mock}. 
+
+Unit testen zouden een vangnet moeten zijn die het grootste deel van de code omvat. Ze zouden ontwikkelaars het vertrouwen moeten geven om aanpassingen te maken omdat ze weten dat als er iets misloopt ze een duidelijk overzicht gaan krijgen van wat waar misliep zodat ze snel kunnen debuggen, \textcite{Zilberfeld2013}.
+
+Unit testen houden zeker niet alle bugs tegen maar ze vergroten de kans dat een nieuw stuk code correct werkt en ze zorgen er voor dat het debuggen van code minder tijd in beslag neemt.
+
+\subsection{Integratie testen}
+
+Integratie testen zijn het soort testen die nagaan of de verschillende componenten (units) correct met elkaar samenwerken. Bij integratie testen komen alle verschillende componenten samen en worden die in hun geheel getest. Hier wordt dus geen gebruik gemaakt van \glspl{mock} zoals bij unit testen, \textcite{Reselman2017}.
+
+Integratie testen maken vaak gebruik van \glspl{API} van derden zoals een \gls{API} die zaken wegschrijft naar een databank. Integratie testen hebben hierdoor vaak een netwerk connectie nodig waardoor het uitvoeren van deze testen veel trager verloopt dan het uitvoeren van unit testen. Unit testen en integratie testen worden het best gescheiden gehouden omdat het voor unit testen belangrijk is dat deze zo snel mogelijk zijn, \textcite{Elliott2016}.
+
+\subsection{Functionele testen}
+\newglossaryentry{XML}{
+	type=\acronymtype,
+    name={XML},
+    description={Extensible Markup Language},
+    see=[Glossary:]{XMLG}
+}
+\newglossaryentry{XMLG}{
+	name={XML},
+    description={XML is een standaard voor de syntax van opmaaktalen en is voor zowel mens als computer leesbaar. XML wordt gebruikt om data op te slaan en te versturen via het internet},
+}
+\newglossaryentry{UI}{
+	type=\acronymtype,
+    name={UI},
+    description={User Interface},
+}
+
+Functionele testen, ook wel browser testen, \gls{UI} testen, front-end testen of end-to-end testen genoemd, zijn het soort testen die de applicatie testen vanuit het oogpunt van de gebruiker. Deze worden ook wel end-to-end testen genoemd omdat de volledige applicatie van front-end tot back-end correct moet werken voor het slagen van deze testen.
+
+Functionele testen doorlopen de processen die de gebruiker ook doorloopt, zoals bijvoorbeeld het inloggen op een website, het navigeren naar een bepaalde pagina via het menu, het invullen van een formulier op een website,... Functionele testen krijgen hiervoor een input mee en een verwachting van wat de output zal zijn en gaan dan na of dit ook daadwerkelijk zo is.
+
+\clearpage
+\section{Soorten tools voor het functioneel testen van een website}
+
+In dit gedeelte wordt onderscheid gemaakt tussen drie soorten \glspl{tool} die gebruikt worden bij het functioneel testen van een website. De eerste soort die besproken wordt, is voor dit onderzoek het belangrijkst. In het volgende hoofdstuk wordt de onderverdeling van die eerste soort nader toegelicht en worden de \glspl{tool} die in dit onderzoek vergeleken worden, besproken.
+
+\subsection{Tools voor het maken van functionele testen}
+\newglossaryentry{WebDriver}
+{
+    name=WebDriver,
+    description={Een WebDriver is een \gls{framework} voor de automatisatie van een browser. Een WebDriver maakt het mogelijk om gebruikersinteracties zoals het navigeren naar een pagina of het invullen van een formulier te automatiseren. Voorbeelden van WebDrivers zijn: Selenium WebDriver, ChromeDriver, GeckoDriver, Microsoft WebDriver,..},
+    plural={WebDrivers}
+}
+\newglossaryentry{assertie}
+{
+    name=Assertie,
+    text=assertie,
+    description={Een assertie is een bewering. Tijdens het schrijven van testen worden asserties gemaakt over de output en vervolgens wordt nagegaan of de werkelijke output hetzelfde is als de beweerde output},
+    plural={asserties}
+}
+De eerste soort zijn de \glspl{tool} die nodig zijn voor het schrijven van functionele testen. Deze soort wordt nog eens opgesplitst in drie verschillende categorieën: 
+\begin{itemize}
+\item De all-in-one \glspl{tool}, dit zijn de \glspl{tool} die volledig onafhankelijk werken en waarvoor er dus geen extra \glspl{tool}, \glspl{framework} of \glspl{library} nodig zijn.
+\item De \glspl{tool} waarvoor er nog een \gls{WebDriver} vereist is voor het kunnen uitvoeren van testen.
+\item De \glspl{library} die nood hebben aan een test \gls{framework} en \gls{assertie} \glspl{library} om als volwaardige test \gls{tool} beschouwd te kunnen worden.
+\end{itemize}
+Meer over deze verschillende soorten in het volgende deel.
+
+
+\subsection{Tools voor cross-browser testen}
+
+Deze soort zijn de \glspl{tool} die nodig zijn om functionele testen op verschillende besturingssystemen, browsers en formaten uit te voeren. Deze \glspl{tool} maken het volgende mogelijk: 
+\begin{itemize}
+\item Het testen van een website op verschillende browsers zoals Google Chrome, Mozilla Firefox, Internet Explorer, Safari, \ldots
+\item Het testen van een website op verschillende versies van browsers.
+\item Het testen van een website op browsers op verschillende besturingssystemen zoals Windows, MacOS, Linux, \ldots
+\item Het testen van een website op verschillende formaten zoals het smartphone formaat, tablet formaat, desktop formaat, \ldots
+\end{itemize}
+\newglossaryentry{Selenium-Grid}
+{
+    name=Selenium-Grid,
+    description={Een Selenium-Grid is een netwerk van verschillende browsers, versies van browsers, browsers op verschillende besturingssystemen en verschillende formaten van browsers die gebruik maken van het Selenium \gls{framework}}
+}
+Deze \glspl{tool} bieden vaak nog extra diensten aan waarvan het in de cloud uitvoeren van testen een van de belangrijkste is. Dit zorgt er voor dat testen niet meer lokaal uitgevoerd worden maar wel op afstand in de cloud. Hierdoor is het parallel uitvoeren van testen mogelijk. Deze \glspl{tool} maken meestal gebruik van een \gls{Selenium-Grid}. In het volgende deel wordt dieper ingegaan op Selenium en \glspl{library} die Selenium uitbreiden.
+\newglossaryentry{snapshot}
+{
+    name=Snapshot,
+    text=snapshot,
+    description={Een snapshot is een afbeelding van de huidige staat van het systeem},
+    plural={snapshots}
+}
+
+Een andere dienst die deze \glspl{tool} kunnen aanbieden zijn het nemen van \glspl{snapshot} na het falen van een test. Aan de hand van deze \glspl{snapshot} is het mogelijk om specifiek te gaan debuggen omdat de exacte staat van het systeem waar de test faalde beschikbaar is.
+
+Voorbeelden van deze soort \glspl{tool} zijn SauceLabs, BrowserStack, CrossBrowserTesting, Testingbot en BrowseEmAll.
+
+\subsection{Tools voor Behavior Driven Development}
+
+\newglossaryentry{user story}
+{
+    name=User story,
+    description={Een user story is een beschrijving van wat een bepaalde gebruiker wil en waarom},
+    plural={user stories}
+}
+De laatste soort zijn optionele \glspl{tool} die een abstractielaag toevoegen bovenop de andere \glspl{tool} om Behavior Driven Development, gedragsgerichte ontwikkeling, mogelijk te maken. \gls{BDD} is een methodologie waarbij de focus ligt op het gedrag van de gebruiker. De verschillende gedragen van de gebruiker (scenario's)  worden meestal vastgelegd aan de hand van \glspl{user story}.
+
+Deze soort \glspl{tool} zijn optioneel en dienen enkel om het lezen en schrijven van testen te vereenvoudigen. Het voordeel van deze \glspl{tool} is dat ze het mogelijk maken voor niet-programmeurs om testen te schrijven. Het nadeel is dat ze extra complexiteit toevoegen die vaak overbodig is.
+
+Voorbeelden van dergelijke \glspl{tool} zijn Cucumber.js en CodeceptJS.
+
+\clearpage
+\section{Tools voor het maken van functionele testen}
+In dit deel worden eerst de \glspl{tool}, \glspl{framework} en \glspl{library} besproken die een ondersteunende rol hebben voor de \glspl{tool} die in dit onderzoek onderzocht worden. Daarna worden per categorie de \glspl{tool} toegelicht die in het volgende hoofdstuk, Methodologie, getest worden. Dit deel wordt afgesloten met de vermelding van \glspl{tool} die in dit onderzoek niet onderzocht worden maar wel belangrijk zijn of ooit geweest zijn.
+
+\subsection{Ondersteunende tools, frameworks en libraries}
+
+\subsubsection{ChromeDriver}
+ChromeDriver is een open source \gls{tool} voor het geautomatiseerd testen van websites. Concreet wil dit zeggen dat ChromeDriver een standalone server is die gebruik maakt van een Chrome of Chromium browser voor het uitvoeren van geautomatiseerde testen. ChromeDriver is beschikbaar op Windows, MacOS en Linux. Dit onderzoek maakt gebruik van ChromeDriver 2.41, \textcite{ChromeDriver2018}.
+
+\subsubsection{Mocha}
+\textcite{Mocha} is een open source Node.js JavaScript \gls{framework} voor het maken van asynchrone testen. Mocha wordt in dit onderzoek gebruikt als standaard test \gls{framework} voor de \glspl{tool} die nog geen test \gls{framework} hebben.
+
+\subsubsection{Chai}
+\newglossaryentry{TDD}{
+	type=\acronymtype,
+    name={TDD},
+    description={Test Driven Development},
+    see=[Glossary:]{TDDG}
+}
+\newglossaryentry{TDDG}
+{
+    name={TDD},
+    description={Test Driven Development is een ontwikkelingswijze waarbij voor er gerpogrammeerd wordt eerst testen geschreven worden}
+}
+\textcite{Chai} is een open source Node.js \gls{library} voor het maken van \glspl{assertie} in testen. Met Chai is het mogelijk om zowel \gls{BDD} als \gls{TDD} \glspl{assertie} te maken. Chai wordt in dit onderzoek gebruikt als standaard \gls{assertie} \gls{library} voor de \glspl{tool} die dit nog niet bevatten.
+
+\subsection{Electron}
+\newglossaryentry{CSS}{
+	type=\acronymtype,
+    name={CSS},
+    description={Cascading Style Sheets},
+}
+\newglossaryentry{HTML}{
+	type=\acronymtype,
+    name={HTML},
+    description={HyperText Markup Language}
+}
+\textcite{Electron} is een \gls{framework} dat gebruik maakt van Chromium en Node.js en dat dient voor het maken van applicaties met webtechnologieën als JavaScript, \gls{HTML} en \gls{CSS}. Electron is open source en beschikbaar op zowel Windows, MacOS als Linux.
+
+\subsection{All-in-one tools}
+
+Dit zijn \glspl{tool} die geen \glspl{framework} of \glspl{library} van derden nodig hebben om te werken, deze \glspl{tool} zijn zelfstandig en bevatten het hele pakket. Het voordeel van deze \glspl{tool} is dat het mogelijk is om testen te schrijven en uit te voeren zonder het downloaden van extra software. Ook de extra complexiteit die wordt toegevoegd bij de integratie van verschillende \glspl{tool} met elkaar valt hier dus weg. De twee die in dit onderzoek besproken en vergeleken worden van dit type zijn: TestCafé en Cypress.
+\newglossaryentry{IDE}{
+	type=\acronymtype,
+    name={IDE},
+    description={Integrated Development Environment},
+    see=[Glossary:]{IDEG}
+}
+\newglossaryentry{IDEG}{
+	name={IDE},
+    description={Een Integrated Development Environment is een verzameling software voor de ontwikkeling en het testen van webapplicaties},
+}
+
+
+\subsubsection{TestCafé}
+\textcite{Testcafe}, niet te verwarren met TestCafé Studio, is een  gratis open source Node.js \gls{tool} voor het automatiseren van end-to-end web testen en is oorspronkelijk ontwikkeld door DevExpress. TestCafé Studio daarentegen is een \gls{IDE} die ook door DevExpress ontwikkeld werd en die het mogelijk maakt om testen te maken zonder code te moeten schrijven. TestCafé Studio is betalend en op deze \gls{tool} wordt in dit onderzoek niet verder ingegaan.
+
+TestCafé werkt op volgende besturingssystemen: Windows, MacOS en Linux, en kan gebruik maken van volgende browsers: Google Chrome, Internet Explorer, Microsoft Edge, Mozilla Firefox, Safari, Android browser. TestCafé kan ook geïntegreerd worden met programma's zoals SauceLabs, BrowserStack of CrossBrowserTesting voor testen in de cloud op meerdere browsers en formaten uit te voeren.
+\newglossaryentry{TypeScript}{
+    name={TypeScript},
+    description={TypeScript is een superset van JavaScript dit wil zeggen dat JavaScript een deelverzameling is van TypeScript en beiden kunnen door elkaar gebruikt worden.}
+}
+
+Het schrijven van testen met TestCafé gebeurt in JavaScript of \gls{TypeScript}.  Een kenmerk van TestCafé is dat het een manier implementeert om slim te testen. Er kunnen wachttijden ingesteld worden voor elementen om te verschijnen op de pagina. Van zodra het element verschijnt gaat de test verder en als de wachttijd overschreden wordt dan faalt de test. Dit zorgt er voor dat er geen verplichte slaaptijden moeten inbouwd worden om te wachten op elementen die niet direct tevoorschijn komen. De code zelf is goed leesbaar omdat de \gls{API} die gebruikt wordt voor elementen te selecteren en \glspl{assertie} te maken eenvoudig, leesbaar en logisch is. Verder kan er ook gebruik gemaakt worden van het Page Object patroon om testen te vereenvoudigen en dubbele code te vermijden. Het Page Object patroon zorgt er voor dat de pagina die getest wordt weg geabstraheerd kan worden en in de code van de test kan gerefereerd worden naar elementen van de pagina die getest moet worden. 
+
+Een ander belangrijk kenmerk van TestCafé is de mogelijkheid om testen parallel uit te voeren. Het is mogelijk om meerdere instanties van dezelfde browser of van verschillende browsers op te zetten. Vervolgens wordt bij het uitvoeren van een \gls{testsuite} de testen over deze verschillende instanties verdeeld.
+
+TestCafé rapporteert automatisch alle JavaScript errors die hij tegenkomt op een webpagina bij het uitvoeren van een test.
+
+TestCafé heeft ook een plugin genaamd TestCafé live waarmee testen kunnen geschreven en aangepast worden terwijl deze worden uitgevoerd. Van zodra er een aanpassing wordt gemaakt stopt de huidige test, indien die nog bezig was, en start het de test gewoon opnieuw. Dit vereenvoudigt het proces van testen schrijven en debuggen sterk.
+
+\newglossaryentry{SASS}{
+	type=\acronymtype,
+    name={SASS},
+    description={Syntactically Awesome Style Sheets},
+}
+\newglossaryentry{Gulp}{
+    name={Gulp},
+    description={Gulp is een \gls{tool} om zaken te automatiseren tijdens het ontwikkelingsproces van een applicatie. Het automatisch compileren van \gls{SASS} code naar \gls{CSS} code bij het opslaan van een \gls{SASS} bestand is een voorbeeld van een taak die Gulp kan uitvoeren}
+}
+\newglossaryentry{Grunt}{
+    name={Grunt},
+    description={Grunt is een \gls{tool} om zaken te automatiseren tijdens het ontwikkelingsproces van een applicatie. Het automatisch compileren van \gls{SASS} code naar \gls{CSS} code bij het opslaan van een \gls{SASS} bestand is een voorbeeld van een taak die Grunt kan uitvoeren}
+}
+
+
+Om TestCafé te integreren in een \gls{CI} systeem is er op de site van TestCafé zelf voldoende documentatie te vinden over hoe dit precies verloopt en zijn er ook door de community plugins ontwikkeld om dit proces te vereenvoudigen. Op de site van TestCafé zelf is de documentatie voor de implementatie in volgende \gls{CI} systemen te vinden: AppVeyor, CircleCI, Jenkins, TeamCity en Travis. TestCafé testen kunnen ook uitgevoerd worden tijdens het ontwikkelingsproces door de testen via plugins toe te voegen aan \gls{Gulp} of \gls{Grunt}. 
+
+
+\subsubsection{Cypress}
+\textcite{Cypress} is de tweede all-in-one \gls{tool} die toegelicht wordt voor het maken van functionele testen en is ook open source. Het is net zoals TestCafé open source en heeft een nieuwe architectuur die niet bovenop Selenium werd gebouwd. Cypress is opnieuw het volledige pakket en is dus niet afhankelijk van servers of drivers voor de installatie of configuratie. Cypress heeft een zeer gebruiksvriendelijke eigen \gls{UI} voor het uitvoeren en meevolgen van testen.
+
+Cypress testen worden volledig in JavaScript geschreven en Cypress heeft zijn eigen \gls{API} voor het automatiseren van de browser of voor de interne configuratie van Cypress te veranderen. Cypress heeft ook een automatische functie ingebouwd om te wachten op elementen om te verschijnen of om \glspl{assertie} te maken. Hierdoor moeten er geen vaste wachttijden ingebouwd worden en wordt er dus tijd uitgespaard.
+
+
+De sterkte van Cypress zit hem in de eenvoud om testen te schrijven en te debuggen. Er zijn enkele redenen waarom dit zo is. De eerste reden is, dat het uitvoeren van Cypress testen live kan meegevolgd worden en dat indien er een aanpassing gemaakt wordt, de test opnieuw start. De tweede reden is dat tijdens het live uitvoeren van testen, de logs van de command line in het linkerdeel van de \gls{UI} te zien zijn waardoor er direct als er iets misloopt een foutmelding te zien is. De derde reden is dat Cypress automatisch \glspl{snapshot} maakt tijdens het uitvoeren van testen. Deze worden vervolgens in de command log geplaatst en achteraf kan op elke stap nagegaan worden wat er dan precies gebeurde. De vierde en laatste reden is dat het met Cypress mogelijk is om screenshots te nemen nadat een test faalde of om de volledige uitvoering van de test te filmen. Hierdoor kan nadat de test is uitgevoerd en gefaald precies terugegaan worden naar het punt waar de test faalde om zo specifiek te debuggen.
+
+Een ander kenmerk van Cypress is de mogelijkheid om gebruik te maken van \glspl{spy} of \glspl{stub} zoals in unit testen. Stubs kunnen gebruikt worden voor het netwerk verkeer zodat de eigen server niet moet gebruikt worden.
+
+De mogelijkheden om Cypress in te bouwen in een \gls{CI} systeem zijn zeer ruim. Zo is Cypress al succesvol geïmplementeerd geweest in volgende systemen: Jenkins, Travis, CircleCI, CodeShip, GitLab, BuildKite, AppVeyor, Semaphore, Concourse, Solano, Docker.
+
+Momenteel is cross-browser testen nog niet mogelijk met Cypress. Enkel varianten van de Chrome familie worden momenteel ondersteund. Cypress heeft wel plannen om in de toekomst meer browsers te ondersteunen, \textcite{Mann2017}. Anderzijds kan over het nut van cross-browser testen ook gediscussieerd worden. Cross-browser testen vergroot de kost en infrastructuur nodig voor het testen erg terwijl dit het vertrouwen slechts licht vergroot. Ook de kans dat een fout browserspecifiek is is zeer klein, \textcite{Mann2018}.
+
+Parallel testen is ook niet mogelijk met enkel Cypress. Wel kan gebruik gemaakt worden van Docker om verschillende Docker containers op te zetten die parallel draaien en met Cypress testen uitvoeren.
+
+\subsection{Frameworks die nood hebben aan een WebDriver}
+
+Dit zijn \glspl{framework} die hun eigen syntax en \glspl{tool} voor \glspl{assertie} hebben maar die nog geen \gls{WebDriver} hebben voor het uitvoeren van deze testen. Voor het uitvoeren van testen met deze soort \glspl{tool} moet er dus nog een \gls{WebDriver} van een derde partij voorzien worden zoals bijvoorbeeld de Selenium \gls{WebDriver}, ChromeDriver of GeckoDriver. Voorbeelden van deze soort zijn Nightwatch en WebdriverIO.
+
+\subsubsection{Nightwatch}
+
+\textcite{Nightwatch} is een open source Node.js \gls{framework} voor het maken van functionele testen. Voor het uitvoeren van testen met Nightwatch is een \gls{WebDriver} van een externe partij vereist. Nightwatch ondersteunt ChromeDriver, GeckoDriver en Selenium Standalone Server.
+\newglossaryentry{XPath}{
+    name={XPath},
+    description={XPath is een taal om elementen te selecteren in een XML document}
+}
+\newglossaryentry{XML}{
+	type=\acronymtype,
+    name={XML},
+    description={Extensible Markup Language},
+    see=[Glossary:]{XMLG}
+}
+\newglossaryentry{XMLG}{
+	name={XML},
+    description={XML is een standaard voor de syntax van opmaaktalen en is voor zowel mens als computer leesbaar. XML wordt gebruikt om data op te slaan en te versturen via het internet},
+}
+
+Nightwatch maakt gebruik van de W3C \gls{WebDriver} \gls{API} voor het uitvoeren van commando's en \glspl{assertie} op \gls{HTML} elementen. Hiermee kan er gebruik gemaakt worden van \gls{CSS} en \gls{XPath} selectors om elementen op de pagina te selecteren.
+\newglossaryentry{CPU}{
+	type=\acronymtype,
+    name={CPU},
+    description={Central Processing Unit},
+	plural={CPU's},
+    see=[Glossary:]{CPUG}
+}
+\newglossaryentry{CPUG}{
+	name={CPU},
+    description={De Central Processing Unit is de computercomponent die verantwoordelijk is voor het interpreteren en uitvoeren van de meeste opdrachten van de andere hardware en software, \textcite{Fisher2018}},
+    plural={CPU's}
+}
+
+Het parallel uitvoeren van testen is mogelijk met Nightwatch, zo kunnen er verschillende instanties van dezelfde browser of van verschillende browsers aangemaakt worden. Het aantal parallelle testen dat kan uitgevoerd worden is gelijk aan het aantal \glspl{CPU}, zijn er 4 \glspl{CPU} dan kunnen er maximaal 4 testen parallel uitgevoerd worden.
+
+Een ander kenmerk van Nightwatch is dat het al een \gls{BDD} \gls{library} bevat en er dus geen gebruik moet gemaakt worden van externe \glspl{library} zoals Cucumber.js of Codecept.js om Behavior Driven testen te schrijven.
+
+Op vlak van cross-browser testen is de integratie van Nightwatch mogelijk met alle bekende cloud services zoals SauceLabs, BrowserStack, TestingBot of CrossBrowserTesting. Momenteel is Nightcloud, een cloud service specifiek voor Nightwatch, in ontwikkeling, \textcite{Nightcloud2017}.
+
+Continue integratie met Nightwatch is mogelijk met alle bekende \gls{CI} systemen zoals Teamcity, Jenkins, Hudson, CircleCI,... Voor de integratie van Nightwatch in het ontwikkelingsproces zijn plugins beschikbaar voor de integratie met \gls{Gulp} of \gls{Grunt}.
+
+Nightwatch wordt door de Drupal community ondersteund en is momenteel in de core van de pre-release van Drupal 8.6 opgenomen. Voordien werd door de Drupal community voornamelijk gebruik gemaakt van PhantomJS voor functionele testen maar nu PhantomJS niet meer onderhouden wordt is de community overgestapt op Nightwatch.
+
+\subsubsection{WebdriverIO}
+\textcite{WebdriverIO} is een open source Node.js test \gls{framework} voor het maken van functionele testen. In tegenstelling tot Nightwatch laat WebdriverIO de keuze van \gls{BDD} of \gls{TDD} test \gls{framework} aan de gebruiker zelf  over. De \glspl{framework} die compatibel zijn met WebdriverIO en waaruit er kan gekoze worden zijn: Mocha, Jasmine en Cucumber. Deze test \glspl{framework} worden aan de hand van Node.js adapter modules verbonden met WebdriverIO.
+
+Standaard is het enkel mogelijk om testen in JavaScript te schrijven maar aan de hand van een Node.js pakket kan de functionaliteit van WebdriverIO uitgebreid worden om ook \gls{TypeScript} te kunnen gebruiken. Elementen zijn met WebdriverIO gemakkelijk te selecteren met de \gls{CSS} of \gls{XPath} selectors. WebdriverIO implementeert \$ en \$\$ functies die geketend worden om makkelijker elementen te selecteren. Dit kan gebruikt worden ter vervanging van ingewikkelde \gls{XPath} selectors.
+
+Tijdens het uitvoeren van testen wordt er een verslag uitgeprint in de command line  over hoe deze testen verliepen. Dit verslag is aanpasbaar en er is keuze uit 10 verschillende reporters die de testverslagen anders uitprinten. Het is ook mogelijk om een zelfgemaakte reporter te gebruikten. WebdriverIO voorziet ook standaard een service die \glspl{snapshot} maakt bij het falen van testen.
+
+Het parallel uitvoeren van testen is mogelijk en in het configuratiebestand van WebdriverIO kan gedefinieerd worden welke verschillende browsers er gebruikt moeten worden en hoeveel instanties van deze browsers.
+\newglossaryentry{REPL}{
+	type=\acronymtype,
+    name={REPL},
+    description={Read–Eval–Print Loop}
+}
+
+Voor de ontwikkeling en het debuggen van testen voorziet WebdriverIO een \gls{REPL} interface, hiermee is mogelijk om commando's uit te voeren in de command line en rechtstreeks in de browser te zien wat er gebeurt.
+
+Op vlak van Cross-Browser testen voorziet WebdriverIO documentatie voor de integratie met de cloud services SauceLabs, Browserstack en TestingBot. Om WebdriverIO aan het lokaal ontwikkelingsproces toe te voegen bestaan er plugins voor de integratie met \gls{Gulp} en voor de integratie met \gls{Grunt}.
+
+Op vlak van continue integratie is het mogelijk om WebdriverIO te integreren in een \gls{CI} systeem. WebdriverIO voorziet enkel documentatie voor de integratie in Jenkins maar er zijn online voorbeelden te vinden over hoe de integratie verloopt in andere systemen zoals Travis.
+
+\subsection{Libraries voor webautomatisering}
+
+Dit zijn \glspl{library} die in eerste plaats niet specifiek dienen voor testen maar wel voor webautomatisering. Deze \glspl{library} kunnen in combinatie met andere \glspl{tool} en \glspl{framework} gebruikt worden voor testen te maken. Het eerste dat deze soort \glspl{tool} nodig heeft is een test \gls{framework}, de populairste voorbeelden hiervan zijn Mocha en Jasmine. Het tweede dat deze soort \glspl{tool} nodig heeft, is een \gls{library} voor \glspl{assertie}, het populairste voorbeeld hiervan is Chai. Aan de hand van deze twee soorten \glspl{tool} kunnen \glspl{library} zoals Puppeteer en Nightmare fungeren als een volwaardig test \gls{framework}.
+
+\subsubsection{Nightmare}
+
+\textcite{Nightmare} is een open source \gls{library} voor browser automatisatie origineel ontwikkeld door Segment maar later open source geworden. Met de \gls{API} van Nightmare is het mogelijk om gebruikersinteracties na te bootsen met simpele commando's zoals goto, type, click,... Nightmare werd oorspronkelijk ontwikkeld voor het automatiseren van taken op een website maar wordt vooral gebruikt voor het functioneel testen van websites en voor het crawlen van websites.
+
+Nightmare maakt gebruik van Electron en Electron is een combinatie van Chromium en Node.js. Dit wil zeggen dat testen of programma's die met Nightmare geschreven worden, uitgevoerd worden in een Chromium omgeving.
+
+Twee handige \glspl{tool} voor het functioneel testen van een website met Nightmare zijn Niffy en Daydream. Niffy is een \gls{tool} die bovenop Nightmare gebouwd is en die helpt om veranderingen of bugs in de \gls{UI} te ontdekken. Daydream is een Chrome extensie waarmee acties die uitgevoerd worden op een website omgezet worden in een Nightmare of Puppeteer script.
+
+Op vlak van cross-browser testen zijn er geen mogelijkheden met Nightmare, Nightmare is enkel ontwikkeld voor de automatisatie van Electron.
+
+De mogelijkheden in verband met het parallel uitvoeren van testen en continue integratie hangen niet direct van Nightmare zelf af, maar hangen wel af van het gebruikte test \gls{framework}. Concreet wil dit zeggen dat als het test \gls{framework} bijvoorbeeld geïntegreerd kan worden in Jenkins en de testen parallel kan uitvoeren dan kan dit ook met Nightmare.
+\newglossaryentry{headless}{
+    name={Headless},
+    text={headless},
+    description={Headless wil zeggen dat er geen \gls{UI} nodig is voor het uitvoeren van het programma}
+}
+
+\subsubsection{Puppeteer}
+\textcite{Puppeteer} is een open source Node.js \gls{library} voor het automatiseren van een Chrome of Chromium browser. Standaard voert Puppeteer een \gls{headless} versie van Chrome of Chromium uit, maar er kan ingesteld worden dat een volledige zichtbare versie van Chrome of Chromium moet uitgevoerd worden. Puppeteer kan gebruikt worden voor alles waarvoor browser automatisatie vereist is, maar wordt voornamelijk gebruikt voor het crawlen van websites en voor het functioneel testen van websites.
+
+Een van de standaard ingebouwde functies van Puppeteer is het nemen van \glspl{snapshot}.
+
+Op vlak van cross-browser testen zijn er geen mogelijkheden met Puppeteer. Puppeteer is enkel ontwikkeld voor de automatisatie van Chrome of Chromium. Wel kunnen cloud services gebruikt worden om testen in de cloud uit te voeren.
+
+Het parallel uitvoeren van testen is mogelijk met Puppeteer maar wordt niet standaard voorzien. Deze functionaliteit kan wel gerealiseerd worden met \glspl{tool} die de community heeft ontwikkeld zoals bijvoorbeeld de puppeteer-cluster \gls{library}. Het integreren van Puppeteer in een \gls{CI} systeem is mogelijk maar hier voorziet Puppeteer geen documentatie over.
+
+\subsection{Overige tools}
+In dit deel worden de \glspl{tool} toegelicht die in dit onderzoek niet getest worden, maar die wel belangrijk genoeg zijn om besproken te worden.
+
+\subsubsection{Selenium}
+Selenium is een alles omvattende \gls{tool} voor het automatiseren van browsers. Selenium bevat zijn eigen \gls{WebDriver} maar kan ook gelinkt worden aan andere \glspl{WebDriver} zoals ChromeDriver en GeckoDriver. Voor het uitvoeren van programma's met de Selenium \gls{WebDriver} is de Selenium Standalone Server vereist.
+
+Selenium wordt voornamelijk gebruikt voor het maken van testen maar het automatiseren van repititieve taken op een website is ook perfect mogelijk met Selenium.
+
+Selenium zelf wordt in dit onderzoek niet onderzocht omdat het verouderd is. Maar sommige van de \glspl{tool}, \glspl{framework} en \glspl{library} die eerder besproken werden en die wel onderzocht worden zijn gebouwd bovenop Selenium ter uitbreiding.
+
+\subsubsection{Appium}
+Appium is een open source test \gls{framework} voor het testen van mobiele applicaties. Met Appium kunnen  iOS, Android en Windows applicaties bestuurd worden om ze te testen.
+
+Appium wordt niet onderzocht omdat Appium specifiek voor mobiele applicaties is en Dropsolid een algemenere \gls{tool} nodig heeft.
+
+
+\subsubsection{Protractor}
+
+Protractor is een end-to-end test \gls{framework} specifiek voor het testen van Angular en AngularJS applicaties.
+
+Protractor wordt om dezelfde reden als Appium niet onderzocht, Dropsolid heeft nood aan iets algemener.
+
+\subsubsection{PhantomJS, SlimerJS}
+PhantomJS is een \gls{headless} \gls{tool} voor browserautomatisatie met Webkit. PhantomJS wordt momenteel niet meer onderhouden sinds Vitaly Slobodin hiermee gestopt is. De reden was de komst van \gls{headless} Chrome die sneller is, minder geheugen inneemt en stabieler is, \textcite{Slobodin2017}.
+
+SlimerJS is gelijkaardig aan PhantomJS, het verschil is dat SlimerJS bovenop Gecko werkt. Gecko is de browser engine van Mozilla Firefox. SlimerJS kan ook niet \gls{headless} uitgevoerd worden.
+
+PhantomJS wordt niet onderzocht omdat het niet meer onderhouden wordt en dus als verouderd kan gezien worden. SlimerJS daarentegen wordt gezien als experimenteel en is dus niet belangrijk genoeg.
+
+
+%Dit hoofdstuk bevat je literatuurstudie. De inhoud gaat verder op de inleiding, maar zal het onderwerp van de bachelorproef *diepgaand* uitspitten. De bedoeling is dat de lezer na lezing van dit hoofdstuk helemaal op de hoogte is van de huidige stand van zaken (state-of-the-art) in het onderzoeksdomein. Iemand die niet vertrouwd is met het onderwerp, weet er nu voldoende om de rest van het verhaal te kunnen volgen, zonder dat die er nog andere informatie moet over opzoeken \autocite{Pollefliet2011}.
+
+%Je verwijst bij elke bewering die je doet, vakterm die je introduceert, enz. naar je bronnen. In \LaTeX{} kan dat met het commando \texttt{$\backslash${textcite\{\}}} of \texttt{$\backslash${autocite\{\}}}. Als argument van het commando geef je de ``sleutel'' van een ``record'' in een bibliografische databank in het Bib\TeX{}-formaat (een tekstbestand). Als je expliciet naar de auteur verwijst in de zin, gebruik je \texttt{$\backslash${}textcite\{\}}.
+%Soms wil je de auteur niet expliciet vernoemen, dan gebruik je \texttt{$\backslash${}autocite\{\}}. In de volgende paragraaf een voorbeeld van elk.
+
+%\textcite{Knuth1998} schreef een van de standaardwerken over sorteer- en zoekalgoritmen. Experten zijn het erover eens dat cloud computing een interessante opportuniteit vormen, zowel voor gebruikers als voor dienstverleners op vlak van informatietechnologie~\autocite{Creeger2009}.
+
+%\lipsum[7-20]

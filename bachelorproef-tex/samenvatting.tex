@@ -1,0 +1,92 @@
+%%=============================================================================
+%% Samenvatting
+%%=============================================================================
+
+% TODO: De "abstract" of samenvatting is een kernachtige (~ 1 blz. voor een
+% thesis) synthese van het document.
+%
+% Deze aspecten moeten zeker aan bod komen:
+% - Context: waarom is dit werk belangrijk?
+% - Nood: waarom moest dit onderzocht worden?
+% - Taak: wat heb je precies gedaan?
+% - Object: wat staat in dit document geschreven?
+% - Resultaat: wat was het resultaat?
+% - Conclusie: wat is/zijn de belangrijkste conclusie(s)?
+% - Perspectief: blijven er nog vragen open die in de toekomst nog kunnen
+%    onderzocht worden? Wat is een mogelijk vervolg voor jouw onderzoek?
+%
+% LET OP! Een samenvatting is GEEN voorwoord!
+
+%%---------- Nederlandse samenvatting -----------------------------------------
+%
+% TODO: Als je je bachelorproef in het Engels schrijft, moet je eerst een
+% Nederlandse samenvatting invoegen. Haal daarvoor onderstaande code uit
+% commentaar.
+% Wie zijn bachelorproef in het Nederlands schrijft, kan dit negeren, de inhoud
+% wordt niet in het document ingevoegd.
+
+\IfLanguageName{english}{%
+\selectlanguage{dutch}
+\chapter*{Samenvatting}
+
+\selectlanguage{english}
+}{}
+
+\newglossaryentry{CI}{
+	type=\acronymtype,
+    name={CI},
+    description={Continue Integratie},
+    first={Continue Integratie (CI)\glsadd{CIG}},
+    see=[Glossary:]{CIG}
+}
+\newglossaryentry{CIG}
+{
+    name={CI},
+    description={Continue Integratie is het proces waarbij de code die weggeschreven is met een versie controle systeem automatisch wordt getest en gebouwd naar een omgeving, \textcite{Guckenheimer2017}}
+}
+\newglossaryentry{Paragraph Types}
+{
+    name=Paragraph Types,
+    description={Paragraph Types zijn inhoudstypes die gemaakt worden met de Drupal module Paragraphs. Paragraph Types kunnen zeer uiteenlopend zijn, van een simpele blok met een afbeelding tot een ingewikkelde slideshow, \textcite{Bobbeldijk2013}}
+}
+\newglossaryentry{tool}
+{
+    name=Tool,
+    text={tool},
+    description={Een software tool is een programma dat gebruikt wordt voor de ontwikkeling, herstelling of verbetering van een ander programma, \textcite{Tool2004}},
+    plural={tools}
+}
+\newglossaryentry{framework}
+{
+    name=Framework,
+    text={framework},
+    description={Een framework is een verzameling van \glspl{library} die gebruikt kunnen worden aan de hand van een \gls{API}, \textcite{Framework}},
+    plural={frameworks}
+}
+\newglossaryentry{library}
+{
+    name=Library,
+    text={library},
+    description={Een library is een verzameling van code die gebruikt wordt om programma's en applicaties te maken, \textcite{Library}},
+    plural={libraries}
+}
+
+%%---------- Samenvatting -----------------------------------------------------
+% De samenvatting in de hoofdtaal van het document
+
+\chapter*{\IfLanguageName{dutch}{Samenvatting}{Abstract}}
+Tegenwoordig bestaan er een hele hoop verschillende \glspl{tool} voor het functioneel testen van een website. Sommige van deze \glspl{tool} bestaan al langer en hebben een groot gebruikersbestand waardoor er veel documentatie over te vinden is. Andere zijn recenter en daar is moeilijk documentatie over te vinden, maar omdat ze dingen vanaf de basis anders doen, kunnen ze beter zijn dan deze. Sommige \glspl{tool} werken op zichzelf en voor andere dient een extra \gls{tool} gebruikt te worden. Dit alles zorgt er voor dat het voor Dropsolid niet makkelijk is om de beste keuze te maken.
+
+\hyperref[ch:inleiding]{Het eerste hoofdstuk} van dit onderzoek is de inleiding en hierin wordt de probleemstelling, de onderzoeksvraag en de onderzoeksdoelstelling geformuleerd. \hyperref{ch:stand-van-zaken}{Het tweede hoofdstuk} vormt de literatuurstudie van dit onderzoek en hierin wordt de stand van zaken in verband met functioneel testen besproken en worden de verschillende \glspl{tool} toegelicht. Ook de \glspl{tool} die niet onderzocht werden maar wel significant kunnen zijn komen hier aan bod en wordt toegelicht waarom deze niet geselecteerd werden. In het daarop volgende hoofdstuk, \hyperref[ch:methodologie]{Methodologie}, wordt de installatie en implementatie van de \glspl{tool} toegelicht.  De \glspl{tool} die in dit onderzoek onderzocht en getest worden zijn: TestCafé, Cypress, Nightwatch, WebdriverIO, Nightmare en Puppeteer. Voor elk van deze wordt een test geschreven die hetzelfde doet om een ruim idee te krijgen over de verschillende uitvoeringstijden, de syntax en de mogelijkheden met de \gls{tool}. De vergelijking van deze \glspl{tool} en de conclusie wordt in het hoofdstuk \hyperref[ch:conclusie]{Conclusie} beschreven.
+
+In samenspraak met Dropsolid werd geconcludeerd dat Nightwatch de beste \gls{tool} is voor hun use case. Deze kwam als beste naar voor grotendeels omdat de Drupal community naar deze \gls{tool} toe groeit. Zo zit Nightwatch al in de core van de pre-release van Drupal 8.6. Verder is cross-browser en cross-platform testen met Nightwatch mogelijk en is er een \gls{tool} specifiek voor cloud testen met Nightwatch in ontwikkeling, Nightcloud.
+\newglossaryentry{testsuite}
+{
+    name=Testsuite,
+    text=testsuite,
+    description={Een testsuite is een collectie van samenhorende testen}
+}
+
+Tenslotte wordt in het laatste hoofdstuk, \hyperref[ch:proofofconcept]{Proof of concept}, de uitwerking van de \gls{testsuite} voor de \gls{Paragraph Types} van Dropsolid hun Drupal 8 installatieprofiel, genaamd Rocketship, besproken.
+
+In de toekomst kan dit onderzoek uitgebreid worden met een onderzoek dat uitzoekt welke service zoals SauceLabs of Browserstack de beste is voor cross-browser testen in de cloud. Ook een onderzoek dat de \gls{CI} mogelijkheden uitzoekt en hoe deze kunnen geïmplementeerd worden zou een goed vervolg zijn op dit onderzoek.
